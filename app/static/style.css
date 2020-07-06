@@ -4,16 +4,19 @@ body, html {
 
 .bt{
   font-size: 27px;
-  color: aliceblue;
-  text-decoration: underline;
+  color: black;
   font-family: 'Roboto', sans-serif;
   font-weight: 550;
+}
+.profile{
+  width: 50px;
+  height: 50px;
 }
 
 
 .leftsplit {
   height: 100%;
-  width: 65%;
+  width: 70%;
   position: fixed;
   z-index: 1;
   top: 0;
@@ -22,7 +25,7 @@ body, html {
 }
 .rightsplit{
   height: 100%;
-  width: 35%;
+  width: 30%;
   position: fixed;
   z-index: 1;
   top: 0;
@@ -104,6 +107,5 @@ button:hover{
   background-image: none;
   background-color: none;
   color: aliceblue;
-  
   
 }
