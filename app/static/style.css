@@ -1,0 +1,109 @@
+body, html {
+  height: 100%;
+}
+
+.bt{
+  font-size: 27px;
+  color: aliceblue;
+  text-decoration: underline;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 550;
+}
+
+
+.leftsplit {
+  height: 100%;
+  width: 65%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+.rightsplit{
+  height: 100%;
+  width: 35%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+  background-image: url("/Users/mingaioh/Desktop/Online-Group-Generator/app/static/resources/rightside.jpg");
+
+}
+
+/* Control the left side */
+.left {
+  left: 0;
+  background-color: white;
+  
+}
+
+/* Control the right side */
+.right {
+  right: 0;
+}
+
+/* If you want the content centered horizontally and vertically */
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.bg {
+  /* The image used */
+  background-image: url("/Users/mingaioh/Desktop/Online-Group-Generator/app/static/resources/joanna-kosinska-1_CMoFsPfso-unsplash.jpg");
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-top: 23%;
+  }
+
+#title{
+  text-align: center;
+  color: aliceblue;
+  font-weight: bold;
+  font-size: 100px;
+  font-family: 'Roboto', sans-serif;
+  margin-right: 420px;
+
+}
+#subTitle{
+  margin-left: 130px;
+  text-align: center;
+  color: aliceblue;
+  font-size: 40px;
+  font-family: 'Roboto', sans-serif;
+}
+
+#button {
+  position: fixed;
+  top: 48%;
+  left: 73%;
+  color: aliceblue;
+  font-size: 40px;
+  border-bottom: 4px solid aliceblue;
+  border-bottom-right-radius: 10px;
+  font-family: 'Roboto', sans-serif;
+  height: 70px;
+  width: 250px;
+  font-style: italic;
+}
+button:hover{
+  -webkit-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  transform: scale(1.05);
+  background-image: none;
+  background-color: none;
+  color: aliceblue;
+  
+  
+}
