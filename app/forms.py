@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, RadioField
-from flask_wtf.file import FileField, FileAllowed
-from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, RadioField, SelectField, MultipleFileField, IntegerField
+from flask_wtf.file import FileAllowed
+from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError, Optional
 from app.models import User
 from flask_login import current_user
 
@@ -25,3 +25,11 @@ class LoginForm(FlaskForm):
  	remember = BooleanField("Remember Me")
 
  	submit = SubmitField("Login")
+
+class GrouperForm(FlaskForm):
+	num_groups = IntegerField("Number of Groups")
+	differentiator = SelectField("Group by", coerce=str) #TODO: Add custom groups
+	students = SelectField("Class", coerce=str)
+	service = RadioField("Service", choices=[("Google Meet", "Google Meet"), ("Zoom", "Zoom")], validators=[Optional()])
+	send_email = BooleanField("Send Email", default=True, description="Send an email with the video conference link to each participant")
+	submit = SubmitField("Generate")
