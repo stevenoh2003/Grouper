@@ -93,6 +93,34 @@ def group(differentiator, num_groups, student_file):
 			groups[int(next(indices))].append(student["Name"])
 	return groups
 
+@app.route('/grouper', methods=["GET", "POST"])
+def grouper():
+	form = GrouperForm()
+
+	#form.differentiator
+	current_working_directory = os.getcwd()
+	os.chdir(f"app/static/groups/{current_user.user_hash}/custom_groups")
+	custom_group_csvs = glob.glob('*.csv')
+	custom_group_choices = [(custom_group, custom_group) for custom_group in custom_group_csvs]
+	form.differentiator.choices = [("Random", "Random"), ("Gender", "Gender"), ("Homeroom", "Homeroom"), ("Nationality", "Nationality")] + custom_group_choices
+	os.chdir(current_working_directory) #Go back to the original working directory - should be equal to os.chdir(f"../../../../../")
+
+	#form.students
+	current_working_directory = os.getcwd()
+	os.chdir(f"app/static/groups/{current_user.user_hash}/students")
+	student_csvs = glob.glob('*.csv')
+	form.students.choices = [(student_list, student_list) for student_list in student_csvs]
+	os.chdir(current_working_directory) #Go back to the original working directory - should be equal to os.chdir(f"../../../../../")
+
+
+	if form.validate_on_submit():
+		if form.differentiator.data in ["Random", "Gender", "Homeroom", "Nationality"]:
+			students_csv_path = os.path.join(app.root_path, f"static/groups/{current_user.user_hash}/students", form.students.data)
+			groups = group(form.differentiator.data, form.num_groups.data, students_csv_path)
+			session["groups"] = groups
+			return redirect(url_for("results"))
+	return render_template("grouper.html", title="Group Generator", form=form)
+
 @app.route("/results")
 def results():
     groups = session['groups'] # counterpart for session
