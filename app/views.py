@@ -1,10 +1,10 @@
 from app import app, db, bcrypt #from the __init__.py inside app/
 from app.models import User
-from app.forms import RegistrationForm, LoginForm
-from flask import render_template, url_for, flash, redirect, request
+from app.forms import RegistrationForm, LoginForm, GrouperForm
+from flask import render_template, url_for, flash, redirect, request, session
 from flask_login import login_user, current_user, logout_user, login_required
-
 import secrets
+import os, glob
 #Grouper algorithm
 import random, csv
 from itertools import cycle
@@ -92,3 +92,8 @@ def group(differentiator, num_groups, student_file):
 		for student in students_with_category:
 			groups[int(next(indices))].append(student["Name"])
 	return groups
+
+@app.route("/results")
+def results():
+    groups = session['groups'] # counterpart for session
+    return render_template("results.html", title="Results", groups=groups)
