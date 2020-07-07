@@ -93,13 +93,21 @@ def group(differentiator, num_groups, student_file):
 			groups[int(next(indices))].append(student["Name"])
 	return groups
 
+def custom_group(custom_group_file):
+	students = []
+	with open(custom_group_file, "r") as data_file:
+		csv_reader = csv.reader(data_file)
+		for line in csv_reader:
+			students.append(line)
+	return students
+
 @app.route('/grouper', methods=["GET", "POST"])
 def grouper():
 	form = GrouperForm()
 
 	#form.differentiator
 	current_working_directory = os.getcwd()
-	os.chdir(f"app/static/groups/{current_user.user_hash}/custom_groups")
+	os.chdir(f"app/static/users/{current_user.user_hash}/custom_groups")
 	custom_group_csvs = glob.glob('*.csv')
 	custom_group_choices = [(custom_group, custom_group) for custom_group in custom_group_csvs]
 	form.differentiator.choices = [("Random", "Random"), ("Gender", "Gender"), ("Homeroom", "Homeroom"), ("Nationality", "Nationality")] + custom_group_choices
@@ -107,7 +115,7 @@ def grouper():
 
 	#form.students
 	current_working_directory = os.getcwd()
-	os.chdir(f"app/static/groups/{current_user.user_hash}/students")
+	os.chdir(f"app/static/users/{current_user.user_hash}/students")
 	student_csvs = glob.glob('*.csv')
 	form.students.choices = [(student_list, student_list) for student_list in student_csvs]
 	os.chdir(current_working_directory) #Go back to the original working directory - should be equal to os.chdir(f"../../../../../")
