@@ -5,6 +5,9 @@ from flask import render_template, url_for, flash, redirect, request
 from flask_login import login_user, current_user, logout_user, login_required
 
 import secrets
+#Grouper algorithm
+import random, csv
+from itertools import cycle
 
 @app.route("/")
 @app.route("/home")
@@ -53,4 +56,39 @@ def logout():
 	logout_user()
 	return redirect(url_for("home"))
 
-@app.route('/grouper', methods=["GET", "POST"])
+
+def group(differentiator, num_groups, student_file):
+	groups = [[] for _ in range(num_groups)]
+	students = []
+
+	with open(student_file, "r") as data_file:
+	    csv_reader = csv.DictReader(data_file)
+	    for line in csv_reader:
+	        students.append(line)
+
+	random.shuffle(students) #shuffle students
+
+	if differentiator == "Random":
+		students_iter = iter(students)
+
+		#first, distribute all students evenly e.g. 4 4 4 for 14 students with 3 groups
+		for group in groups:
+			for _ in range(len(students)//num_groups):
+				group.append(next(students_iter)["Name"])
+
+		#distribute the remaining students e.g. 5 5 4 for 14 students with 3 groups
+		for i in range(len(students)%num_groups):
+			groups[i].append(next(students_iter)["Name"])
+
+		return groups
+
+
+	categories = {student[differentiator] for student in students} #e.g. {Male, Female} {American, Brazilian, Spanish} {10G, 10W, 9W}
+
+	indices = cycle(''.join(str(x) for x in range(num_groups))) #cycles through the groups e.g. 0 1 2 0 1 2 0 1 2 (if num_groups = 3)
+
+	for category in categories:
+		students_with_category = [student for student in students if student[differentiator]==category]
+		for student in students_with_category:
+			groups[int(next(indices))].append(student["Name"])
+	return groups
