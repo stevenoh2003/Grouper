@@ -9,6 +9,7 @@ class User(db.Model, UserMixin):
 	id = db.Column(db.Integer, primary_key=True)
 	email = db.Column(db.String(120), unique=True, nullable=False)
 	password = db.Column(db.String(60), nullable=False)
+	user_hash = db.Column(db.String(8), nullable=False, unique=True)
 
 	def __repr__(self):
 		return f"User({self.email}, {self.image_file})"
