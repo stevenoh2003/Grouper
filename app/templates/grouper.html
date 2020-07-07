@@ -1,7 +1,87 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <div>
-    GROUP GENERATOR
-  </div>
+	<div class="content-selection">
+		<form method="POST" action=""> <!-- empty action means it will post back to the same route -->
+			{{ form.hidden_tag() }}
+			{{ form.csrf_token }}
+			<fieldset class="form-group">
+				<legend class="border-bottom mb-4"> Group! </legend>
+
+				<div class="form-group">
+					{{ form.num_groups.label(class="form-control-label") }}
+
+					{% if form.num_groups.errors %}
+						{{form.num_groups(class="form-control form-control-lg is-invalid")}}
+						<div class="invalid-feedback">
+							{% for error in form.num_groups.errors %}
+								<span> {{error}} </span>
+							{% endfor %}
+						</div>
+					{% else %}
+						{{ form.num_groups(class="form-control form-control-lg") }}
+					{% endif %}
+				</div>
+
+				<div class="form-group">
+					{{ form.differentiator.label(class="form-control-label") }}
+
+					{% if form.differentiator.errors %}
+						{{form.differentiator(class="form-control form-control-lg is-invalid")}}
+						<div class="invalid-feedback">
+							{% for error in form.differentiator.errors %}
+								<span> {{error}} </span>
+							{% endfor %}
+						</div>
+					{% else %}
+						{{ form.differentiator(class="form-control form-control-lg") }}
+					{% endif %}
+				</div>
+
+				<div class="form-group">
+					{{ form.students.label(class="form-control-label") }}
+
+					{% if form.students.errors %}
+						{{form.students(class="form-control form-control-lg is-invalid")}}
+						<div class="invalid-feedback">
+							{% for error in form.students.errors %}
+								<span> {{error}} </span>
+							{% endfor %}
+						</div>
+					{% else %}
+						{{ form.students(class="form-control form-control-lg") }}
+					{% endif %}
+				</div>
+
+				<div class="form-group">
+					{% for subfield in form.service %}
+					    <tr>
+					        <td>{{ subfield }}</td>
+					        <td>{{ subfield.label }}</td>
+					    </tr>
+					{% endfor %}
+					{% if form.service.errors %}
+						{% for error in form.service.errors %}
+							<span> {{error}} </span>
+						{% endfor %}
+					{% endif %}
+				</div>
+
+				<div class="form-group">
+					{{form.send_email.label(class="form-control-label")}}
+					{{form.send_email}}
+
+					{% if form.send_email.errors %}
+						{% for error in form.send_email.errors %}
+							<span> {{error}} </span>
+						{% endfor %}
+					{% endif %}
+				</div>
+			</fieldset>
+
+			<div class="form-group">
+				{{ form.submit(class="btn btn-outline-info") }}
+			</div>
+		</form>
+	</div>
 {% endblock content %}
