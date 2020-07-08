@@ -21,7 +21,7 @@
     <div>
         <div class="leftsplit left">
             <nav class="navbar">
-                <a href="#"> <img alt="Account" class="profile" src="../static/resources/user.svg"> </a>
+                <a href="{{url_for('account')}}"> <img alt="Account" class="profile" src="../static/resources/user.svg"> </a>
                 <div class="form-inline">
                     <a class="nav-item nav-link text-primary" href="{{url_for('home')}}">Home</a>
                     {% if current_user.is_authenticated %}
