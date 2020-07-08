@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
-	<div class="content-selection">
+	<div class="content-selection tbpadding">
 		<form method="POST" action=""> <!-- empty action means it will post back to the same route -->
 			{{ form.hidden_tag() }} <!-- Adds a CSRF (Cross Site Request Forgery) token -->
 			<fieldset class="form-group">
 				<legend class="border-bottom mb-4"> Join Today</legend>
 
-				<div class="form-group">
+				<div class="form-group lengthdecrease">
 					{{ form.email.label(class="form-control-label") }}
 
 					{% if form.email.errors %}
@@ -22,7 +22,7 @@
 					{% endif %}
 				</div>
 
-				<div class="form-group">
+				<div class="form-group lengthdecrease">
 					{{ form.password.label(class="form-control-label") }}
 					
 					{% if form.password.errors %}
@@ -54,12 +54,12 @@
 			</fieldset>
 
 			<div class="form-group">
-				{{ form.submit(class="btn btn-outline-info") }}
+				{{ form.submit(class="btn btn-outline-warning") }}
 			</div>
 		</form>
 	</div>
 
-	<div class="border-top pt-3">
+	<div class="border-top pt-3 tbpadding">
 		<small class="text-muted">
 			Already Have An Account? <a class="ml-2" href="{{url_for('login') }}"> Sign In </a> <!-- name of the function not route -->
 		</small>

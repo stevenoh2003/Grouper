@@ -2,6 +2,29 @@ body, html {
   height: 100%;
 }
 
+.black{
+  color: black;
+  font-family: 'Roboto', sans-serif;
+}
+.none{
+  bottom: 0%;
+}
+.ls{
+  width: 100%;
+  position: fixed;
+  right: 0;
+  height: 100%;
+
+}
+.tbpadding{
+  padding-top: 10px;
+  padding-left: 50px;
+  padding-right: 50px;
+  
+}
+.lengthincrease{
+  width: 160px;
+}
 .bt{
   font-size: 27px;
   color: black;
@@ -12,27 +35,30 @@ body, html {
   height: 50px;
 }
 
-
-.leftsplit {
-  height: 100%;
-  width: 70%;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  overflow-x: hidden;
-  padding-top: 20px;
+.black{
+  color: black;
+  font-family: 'Roboto', sans-serif;
 }
-.rightsplit{
+#decorate{
+  width: 10%;
+}
+
+
+.block{
   height: 100%;
-  width: 30%;
   position: fixed;
-  z-index: 1;
-  top: 0;
   overflow-x: hidden;
-  padding-top: 20px;
-  background-image: url("../static/resources/rightside.jpg");
+  bottom: 0;
 
 }
+
+
+#full {
+  width: 100%;
+  z-index: 1;
+  bottom: 0;
+}
+
 
 /* Control the left side */
 .left {
@@ -67,7 +93,9 @@ body, html {
   background-repeat: no-repeat;
   background-size: cover;
   padding-top: 23%;
+  bottom: 0;
   }
+
 
 #title{
   text-align: center;
