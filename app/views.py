@@ -1,6 +1,7 @@
 from app import app, db, bcrypt #from the __init__.py inside app/
 from app.models import User
-from app.forms import RegistrationForm, LoginForm, GrouperForm
+from app.forms import RegistrationForm, LoginForm, GrouperForm, UpdateAccountForm
+from werkzeug.utils import secure_filename
 from flask import render_template, url_for, flash, redirect, request, session
 from flask_login import login_user, current_user, logout_user, login_required
 import secrets
@@ -135,3 +136,29 @@ def grouper():
 def results():
     groups = session['groups'] # counterpart for session
     return render_template("results.html", title="Results", groups=groups)
+
+@app.route("/account", methods=["GET", "POST"])
+@login_required
+def account():
+	form = UpdateAccountForm()
+	if form.validate_on_submit():
+		
+		#https://stackoverflow.com/questions/57641300/flasks-request-files-getlist-for-isnt-empty-when-field-is-not-submitted
+		#https://stackoverflow.com/questions/58765033/multifilefield-doesnt-return-files-returns-str
+		custom_group_files = request.files.getlist(form.custom_groups.name)
+		if custom_group_files and all(f for f in custom_group_files):
+			for custom_group_file in custom_group_files:
+				custom_group_file.save(os.path.join(app.root_path, f"static/users/{current_user.user_hash}/custom_groups", custom_group_file.filename))
+
+		class_files = request.files.getlist(form.students.name)
+		if class_files and all(f for f in class_files):
+			for class_file in class_files:
+				class_file.save(os.path.join(app.root_path, f"static/users/{current_user.user_hash}/students", class_file.filename))
+
+		current_user.email = form.email.data
+		db.session.commit()
+		flash("Your profile has been updated!", "success")
+		return redirect(url_for("account"))
+	elif request.method == "GET": #populate the form fields with the user's existing email
+		form.email.data = current_user.email
+	return render_template("account.html", title="Account", form=form)
