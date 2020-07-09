@@ -32,7 +32,7 @@ class GrouperForm(FlaskForm):
 	students = SelectField("Class", coerce=str)
 	service = RadioField("Service", choices=[("Google Meet", "Google Meet"), ("Zoom", "Zoom"), ("None", "None")], validators=[Optional()])
 	send_email = BooleanField("Send Email", default=True, description="Send an email with the video conference link to each participant")
-	gmail = StringField("Your Gmail", validators=[Email()])
+	gmail = StringField("Your Gmail")
 	gmail_password = PasswordField("Your Gmail Password")
 	submit = SubmitField("Generate")
 
@@ -47,3 +47,17 @@ class UpdateAccountForm(FlaskForm):
 			user = User.query.filter_by(email=email.data).first() #if email exists - if not, None
 			if user:
 				raise ValidationError("This email is taken.")
+
+class RequestResetForm(FlaskForm):
+	email = StringField("Email", validators=[DataRequired(), Email()])
+	submit = SubmitField("Request Password Reset")
+
+	def validate_email(self, email):
+		user = User.query.filter_by(email=email.data).first() #if email exists - if not, None
+		if user is None:
+			raise ValidationError("There is no account with this email. Please register first.")
+
+class ResetPasswordForm(FlaskForm):
+	password = PasswordField("Password", validators=[DataRequired()])
+	confirm_password = PasswordField("Confirm Password", validators=[DataRequired(), EqualTo("password")])
+	submit = SubmitField("Reset Password")
