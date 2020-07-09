@@ -32,6 +32,9 @@ class GrouperForm(FlaskForm):
 	students = SelectField("Class", coerce=str)
 	service = RadioField("Service", choices=[("Google Meet", "Google Meet"), ("Zoom", "Zoom")], validators=[Optional()])
 	send_email = BooleanField("Send Email", default=True, description="Send an email with the video conference link to each participant")
+
+	gmail = StringField("Your Gmail", validators=[Email()])
+	gmail_password = PasswordField("Your Gmail Password")
 	submit = SubmitField("Generate")
 
 class UpdateAccountForm(FlaskForm):

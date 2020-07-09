@@ -1,5 +1,7 @@
 from app import app, db, bcrypt #from the __init__.py inside app/
 from app.models import User
+from app.selenium_model import get_google_meet_link
+import concurrent.futures
 from app.forms import RegistrationForm, LoginForm, GrouperForm, UpdateAccountForm
 from werkzeug.utils import secure_filename
 from flask import render_template, url_for, flash, redirect, request, session
@@ -128,6 +130,18 @@ def grouper():
 			groups = group(form.differentiator.data, form.num_groups.data, students_csv_path)
 		else:
 			groups = custom_group(os.path.join(app.root_path, f"static/users/{current_user.user_hash}/custom_groups", form.differentiator.data))
+
+		if form.service.data == "Google Meet":
+			NUM_GROUPS = form.num_groups.data
+			links = []
+			with concurrent.futures.ThreadPoolExecutor() as executor:
+			    futures = [executor.submit(get_google_meet_link, form.gmail.data, form.gmail_password.data) for _ in range(NUM_GROUPS)]
+
+			for future in concurrent.futures.as_completed(futures):
+				links.append(future.result())
+			
+			groups = [(groups[index], links[index]) for index in range(form.num_groups.data)]
+
 		session["groups"] = groups
 		return redirect(url_for("results"))
 	return render_template("grouper.html", title="Group Generator", form=form)
