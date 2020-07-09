@@ -16,10 +16,15 @@
         {% endif %}
 
         <style>
-            #grouperp, html{
+            #grouperp, body, html{
                 height: 100%;
-                width: 100%;
                 overflow: auto;
+                min-height: 100%;
+                display: block;
+                position: absolute; 
+                bottom:0;
+                z-index: 1000;
+                position:relative;
             }
             .black{
                 color: black;
@@ -93,6 +98,10 @@
                 font-family: 'Roboto', sans-serif;
                 font-weight: bold;
             }
+            .b{
+                margin-bottom: 50px;
+            }
+    
         </style>  
     </head>
 
@@ -103,7 +112,7 @@
                 <ul class="navbar-nav ml-auto">
                     <a class="nav-item nav-link black" href="{{url_for('home')}}">Home</a>
                     {% if current_user.is_authenticated %}
-                        <a class="nav-item nav-link black" href="{{url_for('grouper')}}">Group Generator</a>
+                        <a class="nav-item nav-link imp" href="{{url_for('grouper')}}">Group Generator</a>
                         <a class="nav-item nav-link black" href="{{url_for('logout')}}">Logout</a>
                     {% else %}
                         <a class="nav-item nav-link black" href="{{url_for('login')}}">Log in</a>
