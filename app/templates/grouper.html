@@ -14,7 +14,7 @@
 				<fieldset class="form-group">
 					<legend class="border-bottom mb-4"> Group! </legend>
 	
-					<div class="form-group lengthdecrease" id="numOfGroups">
+					<div class="form-group lengthforgrouper" id="numOfGroups">
 						{{ form.num_groups.label(class="form-control-label") }}
 	
 						{% if form.num_groups.errors %}
@@ -29,7 +29,7 @@
 						{% endif %}
 					</div>
 	
-					<div class="form-group lengthdecrease">
+					<div class="form-group lengthforgrouper">
 						{{ form.differentiator.label(class="form-control-label") }}
 	
 						{% if form.differentiator.errors %}
@@ -45,7 +45,7 @@
 					</div>
 	
 					
-					<div class="form-group lengthdecrease" id="class">
+					<div class="form-group lengthforgrouper" id="class">
 						{{ form.students.label(class="form-control-label") }}
 	
 						{% if form.students.errors %}
@@ -76,7 +76,7 @@
 	
 					<div id="useremail">
 	
-					<div class="form-group lengthdecrease">
+					<div class="form-group lengthforgrouper">
 						{{form.gmail.label}}
 						{% if form.gmail.errors %}
 							{{form.gmail(class="form-control form-control-lg is-invalid")}}
@@ -90,7 +90,7 @@
 						{% endif %}
 					</div>
 	
-					<div class="form-group lengthdecrease">
+					<div class="form-group lengthforgrouper">
 						{{form.gmail_password.label(class="form-control-label")}}
 						<div>
 							{{form.gmail_password(class="form-control form-control-lg")}}
