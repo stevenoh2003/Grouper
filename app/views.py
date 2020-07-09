@@ -12,6 +12,7 @@ import os, glob
 #Grouper algorithm
 import random, csv
 from itertools import cycle
+import threading
 
 @app.route("/")
 @app.route("/home")
@@ -69,7 +70,7 @@ def logout():
 	return redirect(url_for("home"))
 
 
-def group(differentiator, num_groups, student_file):
+def group_function(differentiator, num_groups, student_file):
 	groups = [[] for _ in range(num_groups)]
 	students = []
 
@@ -113,6 +114,15 @@ def custom_group(custom_group_file):
 			students.append(line)
 	return students
 
+def send_link_email(recipients, link, service):
+	msg = Message(
+		f"{service} invitation", 
+		sender=app.config["MAIL_USERNAME"], 
+		recipients=recipients, 
+		body = f"Please join the {service} call: {link}"
+	)
+	mail.send(msg)
+
 @app.route('/grouper', methods=["GET", "POST"])
 def grouper():
 	form = GrouperForm()
@@ -136,7 +146,7 @@ def grouper():
 	if form.validate_on_submit():
 		if form.differentiator.data in ["Random", "Gender", "Homeroom", "Nationality"]:
 			students_csv_path = os.path.join(app.root_path, f"static/users/{current_user.user_hash}/students", form.students.data)
-			groups = group(form.differentiator.data, form.num_groups.data, students_csv_path)
+			groups = group_function(form.differentiator.data, form.num_groups.data, students_csv_path)
 			is_custom_group = False
 		else:
 			is_custom_group = True
@@ -152,6 +162,41 @@ def grouper():
 				links.append(future.result())
 			
 			groups = [(groups[index], links[index]) for index in range(form.num_groups.data)]
+
+		
+		if form.send_email:
+			links = [group[1] for group in groups]
+			if is_custom_group:
+				recipients = [group[0] for group in groups]
+			else:
+				recipients = []
+				for group in groups:
+					with open(os.path.join(app.root_path, f"static/users/{current_user.user_hash}/students", form.students.data), "r") as data_file:
+						csv_reader = csv.DictReader(data_file)
+						#recipients = [[line["Email"] for line in csv.DictReader(data_file) if line["Name"] in group[0]] for group in groups]
+						recipients.append([line["Email"] for line in csv.DictReader(data_file) if line["Name"] in group[0]])
+
+			flash(recipients, "info")
+			flash(links, "info")
+			"""
+			threads = []
+			for i in range(form.num_groups.data): #_ is a throw away variable - "ignore this" variable
+			    t = threading.Thread(target=send_link_email, args=[recipients[i], links[i], form.service.data]) #Note: do_something, NOT do_something()
+			    t.start()
+			    threads.append(t)
+
+			for thread in threads:
+			    thread.join() #Make sure the thread completes before moving on because otherwise the timer wouldn't work
+			"""
+
+			#with concurrent.futures.ThreadPoolExecutor() as executor:		
+			#	results = executor.map(send_link_email, recipients, links, form.service.data)
+			#for result in results:
+			#	print(result)
+			#map(send_link_email, recipients, links, form.service.data)
+
+			for i in range(form.num_groups.data):
+				send_link_email(recipients[i], links[i], form.service.data)
 
 		session["groups"] = groups
 		return redirect(url_for("results", is_custom_group=is_custom_group))
