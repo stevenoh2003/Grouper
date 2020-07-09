@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="en">
-<<<<<<< Updated upstream
     <head>
         <!-- Required meta tags -->
         <meta charset="utf-8">
@@ -17,6 +16,11 @@
         {% endif %}
 
         <style>
+            #grouperp, html{
+                height: 100%;
+                width: 100%;
+                overflow: auto;
+            }
             .black{
                 color: black;
                 font-family: 'Roboto', sans-serif;
@@ -29,18 +33,15 @@
                 position: fixed;
                 right: 0;
                 height: 100%;
-
             }
             .tbpadding{
                 padding-top: 10px;
                 padding-left: 50px;
                 padding-right: 50px;
-                
             }
             .lengthincrease{
                 width: 160px;
             }
-
             .lengthdecrease{
                 width: 50%
             }
@@ -51,7 +52,6 @@
                 color: black;
                 font-family: 'Roboto', sans-serif;
                 font-size: 30px;
-
             }
             .loader {
                 position: relative;
@@ -74,119 +74,30 @@
                 0% { transform: rotate(0deg); }
                 100% { transform: rotate(360deg); }
             }
+
+            #border{
+                padding-top: 10px;
+                margin-top: 20px;
+                border-right: 1px solid black;
+                height: 150%;
+                border-collapse:collapse;
+                padding-bottom:0 100px;
+            }
+            #par{
+                padding-top: 50px;
+                padding-right: 30px;
+                padding-left: 30px;
+            }
+            .imp{
+                color: orange;
+                font-family: 'Roboto', sans-serif;
+                font-weight: bold;
+            }
         </style>  
     </head>
 
     <body>
         <div>
-=======
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
-    {% if title %}
-        <title> {{title}}</title>
-    {% else %}
-        <title> Grouper </title>
-    {% endif %}
-    <style>
-        #grouperp, html{
-            height: 100%;
-            width: 100%;
-            overflow: auto;
-
-        }
-        .black{
-            color: black;
-            font-family: 'Roboto', sans-serif;
-        }
-        .none{
-            bottom: 0%;
-        }
-        .ls{
-            width: 100%;
-            position: fixed;
-            right: 0;
-            height: 100%;
-
-        }
-        .tbpadding{
-            padding-top: 10px;
-            padding-left: 50px;
-            padding-right: 50px;
-            
-        }
-        .lengthincrease{
-            width: 160px;
-        }
-
-        .lengthdecrease{
-            width: 50%
-        }
-        .number{
-            width: 20%
-        }
-        #result{
-            color: black;
-            font-family: 'Roboto', sans-serif;
-            font-size: 30px;
-
-        }
-        .loader {
-            position: relative;
-        border: 16px solid #f3f3f3; /* Light grey */
-        border-top: 16px solid #3498db; /* Blue */
-        border-radius: 50%;
-        width: 120px;
-        height: 120px;
-        animation: spin 2s linear infinite;
-
-        z-index: 99 !important;      
-        position: fixed;
-        top: 45%;
-        left: 47%;
-  /* bring your own prefixes */
-        transform: translate(-50%, -50%);    
-        }
-
-        @keyframes spin {
-        0% { transform: rotate(0deg); }
-        100% { transform: rotate(360deg); }
-        }
-
-        #border{
-            padding-top: 10px;
-            margin-top: 20px;
-            border-right: 1px solid black;
-            height: 150%;
-            border-collapse:collapse;
-            padding-bottom:0 100px;
-        }
-        #par{
-            padding-top: 50px;
-            padding-right: 30px;
-            padding-left: 30px;
-        }
-        .imp{
-            color: orange;
-            font-family: 'Roboto', sans-serif;
-            font-weight: bold;
-        }
-
-    </style>  
-</head>
-
-
-  <body>
-
-    <div>
-       
-
->>>>>>> Stashed changes
             <nav class="navbar navbar-expand-lg bg-light">
                 <a href="{{url_for('account')}}"> <img alt="Account" class="profile" src="../static/resources/user.svg"> </a>
                 <ul class="navbar-nav ml-auto">
