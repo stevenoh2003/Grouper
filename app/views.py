@@ -31,6 +31,14 @@ def register():
 		db.session.add(user)
 		db.session.commit()
 		flash(f"Account created for {form.email.data}!", "success")
+
+		#Create folders for this user
+		current_working_directory = os.getcwd()
+		os.mkdir(f"app/static/users/{hashed_id}")
+		os.chdir(f"app/static/users/{hashed_id}")
+		os.mkdir("students")
+		os.mkdir("custom_groups")
+		os.chdir(current_working_directory)
 		return redirect(url_for("login"))
 	return render_template("register.html", title="Register", form=form)
 
