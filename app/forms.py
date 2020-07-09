@@ -61,3 +61,7 @@ class ResetPasswordForm(FlaskForm):
 	password = PasswordField("Password", validators=[DataRequired()])
 	confirm_password = PasswordField("Confirm Password", validators=[DataRequired(), EqualTo("password")])
 	submit = SubmitField("Reset Password")
+
+class SaveGroupForm(FlaskForm):
+	filename = StringField("Group name", validators=[DataRequired()])
+	submit = SubmitField("Save group")

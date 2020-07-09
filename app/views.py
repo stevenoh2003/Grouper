@@ -2,7 +2,7 @@ from app import app, db, bcrypt, mail #from the __init__.py inside app/
 from app.models import User
 from app.selenium_model import get_google_meet_link
 import concurrent.futures
-from app.forms import RegistrationForm, LoginForm, GrouperForm, UpdateAccountForm, RequestResetForm, ResetPasswordForm
+from app.forms import RegistrationForm, LoginForm, GrouperForm, UpdateAccountForm, RequestResetForm, ResetPasswordForm, SaveGroupForm
 from werkzeug.utils import secure_filename
 from flask import render_template, url_for, flash, redirect, request, session
 from flask_login import login_user, current_user, logout_user, login_required
@@ -137,7 +137,9 @@ def grouper():
 		if form.differentiator.data in ["Random", "Gender", "Homeroom", "Nationality"]:
 			students_csv_path = os.path.join(app.root_path, f"static/users/{current_user.user_hash}/students", form.students.data)
 			groups = group(form.differentiator.data, form.num_groups.data, students_csv_path)
+			is_custom_group = False
 		else:
+			is_custom_group = True
 			groups = custom_group(os.path.join(app.root_path, f"static/users/{current_user.user_hash}/custom_groups", form.differentiator.data))
 
 		if form.service.data == "Google Meet":
@@ -152,13 +154,25 @@ def grouper():
 			groups = [(groups[index], links[index]) for index in range(form.num_groups.data)]
 
 		session["groups"] = groups
-		return redirect(url_for("results"))
+		return redirect(url_for("results", is_custom_group=is_custom_group))
 	return render_template("grouper.html", title="Group Generator", form=form)
 
-@app.route("/results")
-def results():
+@app.route("/results/<int:is_custom_group>", methods=["GET", "POST"])
+def results(is_custom_group):
     groups = session['groups'] # counterpart for session
-    return render_template("results.html", title="Results", groups=groups)
+    if not is_custom_group:
+    	form = SaveGroupForm()
+
+    	if form.validate_on_submit():
+    		filename = form.filename.data
+    		with open(f"app/static/users/{current_user.user_hash}/custom_groups/{filename}.csv", "w") as csv_file:
+    			csv_writer = csv.writer(csv_file, delimiter=",")
+    			for group in groups:
+    				csv_writer.writerow(group)
+    		flash(f"The custom group {filename} has been saved for use later!", "success")
+    	return render_template("results.html", title="Results", groups=groups, form=form)
+    else:
+    	return render_template("results.html", title="Results", groups=groups)
 
 @app.route("/account", methods=["GET", "POST"])
 @login_required
