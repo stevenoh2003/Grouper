@@ -54,11 +54,11 @@
 					{% endif %}
 				</div>
 
-				<div class="form-group">
+				<div class="form-group" id="radiob">
 					{% for subfield in form.service %}
 					    <tr>
 					        <td>{{ subfield }}</td>
-					        <td>{{ subfield.label }}</td>
+							<td>{{ subfield.label }}</td>
 					    </tr>
 					{% endfor %}
 					{% if form.service.errors %}
@@ -68,7 +68,9 @@
 					{% endif %}
 				</div>
 
-				<div class="form-group">
+				<div id="useremail">
+
+				<div class="form-group lengthdecrease">
 					{{form.gmail.label}}
 					{% if form.gmail.errors %}
 						{{form.gmail(class="form-control form-control-lg is-invalid")}}
@@ -82,18 +84,21 @@
 					{% endif %}
 				</div>
 
-				<div class="form-group">
-					{{form.gmail_password.label}}
-					{{form.gmail_password}}
+				<div class="form-group lengthdecrease">
+					{{form.gmail_password.label(class="form-control-label")}}
+					<div>
+						{{form.gmail_password(class="form-control form-control-lg")}}
+
+					</div>
 				</div>
 
 				<div class="form-group">
 					{{form.send_email.label(class="form-control-label")}}
+				
 					{{form.send_email}}
-					<div id=""> 
-						{{form.anouncement}}
-					</div>
-	
+
+				
+
 		
 
 					{% if form.send_email.errors %}
@@ -102,6 +107,8 @@
 						{% endfor %}
 					{% endif %}
 				</div>
+
+			</div>
 			</fieldset>
 
 			<div class="form-group">
@@ -114,8 +121,13 @@
   <script>
 	$(document).ready(function() {
     var $groupBy = $("#differentiator"),
-      $class = $("#class");
-      $numG = $("#numOfGroups");
+      $class = $("#class"),
+	  $numG = $("#numOfGroups"),
+	  $mail = $("#useremail"),
+	  $none = $("#service-2");
+	  $zoom = $("#service-1");
+	  $meet = $("#service-0");
+
     
     $groupBy.on('change', function() {
       if ($groupBy.val() === "Gender"||$groupBy.val() === "Homeroom"||$groupBy.val() === "Nationality"||$groupBy.val() === "Random") {
@@ -125,7 +137,21 @@
         $class.hide();
         $numG.hide();
       }
-    });
+	});
+
+	$none.click(function(){
+		$mail.hide();
+	});
+
+	$meet.click(function(){
+		$mail.show();
+
+	});
+	$zoom.click(function(){
+		$mail.show();
+
+	});
+
   
   })
   </script>
