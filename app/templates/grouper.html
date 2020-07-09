@@ -113,11 +113,12 @@
 				</div>
 
 			</div>
-			</fieldset>
-
 			<div class="form-group">
 				{{ form.submit(class="btn btn-outline-warning") }}
 			</div>
+			</fieldset>
+
+			
 		</form>
 
 	</div>
@@ -126,6 +127,7 @@
 {% block javascript %}
   <script>
 	$(document).ready(function() {
+
 	$("loader").css("display", "none");
 
     var $groupBy = $("#differentiator"),
@@ -155,10 +157,13 @@
 
 	$meet.click(function(){
 		$mail.show();
+		$("body").css("overflow", "visible");
 
 	});
 	$zoom.click(function(){
 		$mail.show();
+		$("body").css("overflow", "visible");
+
 
 	});
 
