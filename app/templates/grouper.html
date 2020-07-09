@@ -2,133 +2,160 @@
 
 {% block content %}
 
-<!-- <div class="loader"></div> -->
+<div class="loader" id="loader"><br></div>
 
-	<div class="content-selection tbpadding">
+<div class="row" >
+	<div class="col-6" id="border">
+		<div class="content-selection tbpadding" id="back">
 
-		<form method="POST" action=""> <!-- empty action means it will post back to the same route -->
-			{{ form.hidden_tag() }}
-			{{ form.csrf_token }}
-			<fieldset class="form-group">
-				<legend class="border-bottom mb-4"> Group! </legend>
-
-				<div class="form-group number" id="numOfGroups">
-					{{ form.num_groups.label(class="form-control-label") }}
-
-					{% if form.num_groups.errors %}
-						{{form.num_groups(class="form-control form-control-lg is-invalid")}}
-						<div class="invalid-feedback">
-							{% for error in form.num_groups.errors %}
-								<span> {{error}} </span>
-							{% endfor %}
-						</div>
-					{% else %}
-						{{ form.num_groups(class="form-control form-control-lg") }}
-					{% endif %}
-				</div>
-
-				<div class="form-group lengthdecrease">
-					{{ form.differentiator.label(class="form-control-label") }}
-
-					{% if form.differentiator.errors %}
-						{{form.differentiator(class="form-control form-control-lg is-invalid")}}
-						<div class="invalid-feedback">
-							{% for error in form.differentiator.errors %}
-								<span> {{error}} </span>
-							{% endfor %}
-						</div>
-					{% else %}
-						{{ form.differentiator(class="form-control form-control-lg") }}
-					{% endif %}
-				</div>
-
-				
-				<div class="form-group lengthdecrease" id="class">
-					{{ form.students.label(class="form-control-label") }}
-
-					{% if form.students.errors %}
-						{{form.students(class="form-control form-control-lg is-invalid")}}
-						<div class="invalid-feedback">
-							{% for error in form.students.errors %}
-								<span> {{error}} </span>
-							{% endfor %}
-						</div>
-					{% else %}
-						{{ form.students(class="form-control form-control-lg") }}
-					{% endif %}
-				</div>
-
-				<div class="form-group" id="radiob">
-					{% for subfield in form.service %}
-					    <tr>
-					        <td>{{ subfield }}</td>
-							<td>{{ subfield.label }}</td>
-					    </tr>
-					{% endfor %}
-					{% if form.service.errors %}
-						{% for error in form.service.errors %}
-							<span> {{error}} </span>
-						{% endfor %}
-					{% endif %}
-				</div>
-
-				<div id="useremail">
-
-				<div class="form-group lengthdecrease">
-					{{form.gmail.label}}
-					{% if form.gmail.errors %}
-						{{form.gmail(class="form-control form-control-lg is-invalid")}}
-						<div class="invalid-feedback">
-							{% for error in form.gmail.errors %}
-								<span> {{error}} </span>
-							{% endfor %}
-						</div>
-					{% else %}
-						{{ form.gmail(class="form-control form-control-lg") }}
-					{% endif %}
-				</div>
-
-				<div class="form-group lengthdecrease">
-					{{form.gmail_password.label(class="form-control-label")}}
-					<div>
-						{{form.gmail_password(class="form-control form-control-lg")}}
-
+			<form method="POST" action=""> <!-- empty action means it will post back to the same route -->
+				{{ form.hidden_tag() }}
+				{{ form.csrf_token }}
+				<fieldset class="form-group">
+					<legend class="border-bottom mb-4"> Group! </legend>
+	
+					<div class="form-group lengthforgrouper" id="numOfGroups">
+						{{ form.num_groups.label(class="form-control-label") }}
+	
+						{% if form.num_groups.errors %}
+							{{form.num_groups(class="form-control form-control-lg is-invalid")}}
+							<div class="invalid-feedback">
+								{% for error in form.num_groups.errors %}
+									<span> {{error}} </span>
+								{% endfor %}
+							</div>
+						{% else %}
+							{{ form.num_groups(class="form-control form-control-lg") }}
+						{% endif %}
 					</div>
-				</div>
-
-				<div class="form-group">
-					{{form.send_email.label(class="form-control-label")}}
-				
-					{{form.send_email}}
-
-				
-
-		
-
-					{% if form.send_email.errors %}
-						{% for error in form.send_email.errors %}
-							<span> {{error}} </span>
+	
+					<div class="form-group lengthforgrouper">
+						{{ form.differentiator.label(class="form-control-label") }}
+	
+						{% if form.differentiator.errors %}
+							{{form.differentiator(class="form-control form-control-lg is-invalid")}}
+							<div class="invalid-feedback">
+								{% for error in form.differentiator.errors %}
+									<span> {{error}} </span>
+								{% endfor %}
+							</div>
+						{% else %}
+							{{ form.differentiator(class="form-control form-control-lg") }}
+						{% endif %}
+					</div>
+	
+					
+					<div class="form-group lengthforgrouper" id="class">
+						{{ form.students.label(class="form-control-label") }}
+	
+						{% if form.students.errors %}
+							{{form.students(class="form-control form-control-lg is-invalid")}}
+							<div class="invalid-feedback">
+								{% for error in form.students.errors %}
+									<span> {{error}} </span>
+								{% endfor %}
+							</div>
+						{% else %}
+							{{ form.students(class="form-control form-control-lg") }}
+						{% endif %}
+					</div>
+	
+					<div class="form-group" id="radiob">
+						{% for subfield in form.service %}
+							<tr>
+								<td>{{ subfield }}</td>
+								<td>{{ subfield.label }}</td>
+							</tr>
 						{% endfor %}
-					{% endif %}
-				</div>
-
-			</div>
-			<div class="form-group">
-				{{ form.submit(class="btn btn-outline-warning") }}
-			</div>
-			</fieldset>
-
+						{% if form.service.errors %}
+							{% for error in form.service.errors %}
+								<span> {{error}} </span>
+							{% endfor %}
+						{% endif %}
+					</div>
+	
+					<div id="useremail">
+	
+					<div class="form-group lengthforgrouper">
+						{{form.gmail.label}}
+						{% if form.gmail.errors %}
+							{{form.gmail(class="form-control form-control-lg is-invalid")}}
+							<div class="invalid-feedback">
+								{% for error in form.gmail.errors %}
+									<span> {{error}} </span>
+								{% endfor %}
+							</div>
+						{% else %}
+							{{ form.gmail(class="form-control form-control-lg") }}
+						{% endif %}
+					</div>
+	
+					<div class="form-group lengthforgrouper">
+						{{form.gmail_password.label(class="form-control-label")}}
+						<div>
+							{{form.gmail_password(class="form-control form-control-lg")}}
+	
+						</div>
+					</div>
+	
+					<div class="form-group">
+						{{form.send_email.label(class="form-control-label")}}
+					
+						{{form.send_email}}
+	
+					
+	
 			
-		</form>
-
+	
+						{% if form.send_email.errors %}
+							{% for error in form.send_email.errors %}
+								<span> {{error}} </span>
+							{% endfor %}
+						{% endif %}
+					</div>
+					
+				</div>
+				<div class="form-group">
+					{{ form.submit(class="btn btn-outline-warning") }}
+				</div>
+				</fieldset>
+	
+			
+			</form>
+	
+		</div>
 	</div>
+	<div class="col-6" id="par">
+		<h2>To generate groups from a <span class="imp">class list/list of students</span></h2>
+		<ol>
+			<li>Select how many groups.</li>
+			<li>Customize your groups. Based on discriminators such as gender, nationality and homeroom, the students will be evenly distributed into each group.</li>
+			<li>Select the file that contains students from your class.</li>
+			<li>Select whether to send google meet or zoom links to each of the groups generated. Then type your Gmail account and password for the system to access Google Meet or Zoom. Select none if you don't want to send meet links.</li>
+			<li>Press Generate.</li>
+		  </ol>
+		  <h2>To use <span class="imp">past grouping patterns</span> </h2>
+		  <ol>
+			  <li>Select how many groups.</li>
+			  <li>Select the file name in the "Group By" dropdown.</li>
+			  <li>Select Zoom, Google meet, or none.</li>
+			  <li>Press Generate.</li>
+			  
+
+		  </ol>
+		
+	</div>
+</div>
+
+	
+
 
 {% endblock content %}
 {% block javascript %}
   <script>
 	$(document).ready(function() {
 
-	$("loader").css("display", "none");
+	$("#loader").css("display", "none");
 
     var $groupBy = $("#differentiator"),
       $class = $("#class"),
@@ -168,9 +195,13 @@
 	});
 
 	$("#submit").click(function(){
-		$("loader").show();
-		$("body").css("opacity", "0.5")
+		$("#loader").show();
+		$("#back").css("opacity", "0.5")
 	})
+
+
+
+
 
 
   
