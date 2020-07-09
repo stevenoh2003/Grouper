@@ -30,7 +30,7 @@ class GrouperForm(FlaskForm):
 	num_groups = IntegerField("Number of Groups", validators=[Optional()])
 	differentiator = SelectField("Group by", coerce=str) #TODO: Add custom groups
 	students = SelectField("Class", coerce=str)
-	service = RadioField("Service", choices=[("Google Meet", "Google Meet"), ("Zoom", "Zoom"), ("None", "None")], validators=[Optional()])
+	service = RadioField("Service", choices=[("Google Meet", "Google Meet"), ("Zoom", "Zoom"), ("None", "None")], validators=[Optional()], default="None")
 	send_email = BooleanField("Send Email", default=True, description="Send an email with the video conference link to each participant")
 	gmail = StringField("Your Gmail")
 	gmail_password = PasswordField("Your Gmail Password")
