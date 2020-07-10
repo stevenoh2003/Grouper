@@ -8,6 +8,7 @@
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+        <link rel="icon" href="../static/resources/favicon.ico">
         
         {% if title %}
             <title> {{title}}</title>
@@ -16,6 +17,15 @@
         {% endif %}
 
         <style>
+            .btc:hover{
+                color: white;
+            }
+            a:hover{
+                color: orange;
+            }
+            .darken{
+                background-color: 20%;
+            }
             #grouperp, body, html{
                 height: 100%;
                 overflow: auto;
@@ -101,13 +111,15 @@
             .b{
                 margin-bottom: 50px;
             }
-    
+            .navbb{
+                background-color: #F0F0F0;
+            }    
         </style>  
     </head>
 
     <body>
         <div>
-            <nav class="navbar navbar-expand-lg bg-light">
+            <nav class="navbar navbar-expand-sm navbb">
                 <a href="{{url_for('account')}}"> <img alt="Account" class="profile" src="../static/resources/user.svg"> </a>
                 <ul class="navbar-nav ml-auto">
                     <a class="nav-item nav-link black" href="{{url_for('home')}}">Home</a>

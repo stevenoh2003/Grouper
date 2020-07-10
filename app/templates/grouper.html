@@ -3,7 +3,6 @@
 {% block content %}
 
 <div class="loader" id="loader"><br></div>
-
 <div id="grouperp">
 
 <div class="row">
@@ -102,13 +101,7 @@
 	
 					<div class="form-group">
 						{{form.send_email.label(class="form-control-label")}}
-					
 						{{form.send_email}}
-	
-					
-	
-			
-	
 						{% if form.send_email.errors %}
 							{% for error in form.send_email.errors %}
 								<span> {{error}} </span>
@@ -118,13 +111,13 @@
 					
 				</div>
 				<div class="form-group">
-					{{ form.submit(class="btn btn-outline-warning b") }}
+					{{ form.submit(class="btn btn-outline-warning b btc") }}
 				</div>
 				</fieldset>
-				
+	
 			
 			</form>
-		
+	
 		</div>
 	</div>
 	<div class="col-6" id="par">
@@ -198,7 +191,7 @@
 
 	$("#submit").click(function(){
 		$("#loader").show();
-		$("#back").css("opacity", "0.5")
+		$("#grouperp").hide();
 	})
 
 
