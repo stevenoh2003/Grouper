@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
+        <link rel="icon" href="../static/resources/favicon.ico">
+        
+        {% if title %}
+            <title> {{title}}</title>
+        {% else %}
+            <title> Grouper </title>
+        {% endif %}
+
+        <style>
+            .btc:hover{
+                color: white;
+            }
+            a:hover{
+                color: orange;
+            }
+            .darken{
+                background-color: 20%;
+            }
+            #grouperp, body, html{
+                height: 100%;
+                overflow: auto;
+                min-height: 100%;
+                display: block;
+                position: absolute; 
+                bottom:0;
+                z-index: 1000;
+                position:relative;
+            }
+            .black{
+                color: black;
+                font-family: 'Roboto', sans-serif;
+            }
+            .none{
+                bottom: 0%;
+            }
+            .ls{
+                width: 100%;
+                position: fixed;
+                right: 0;
+                height: 100%;
+            }
+            .tbpadding{
+                padding-top: 10px;
+                padding-left: 50px;
+                padding-right: 50px;
+            }
+            .lengthincrease{
+                width: 160px;
+            }
+            .lengthdecrease{
+                width: 50%
+            }
+            .number{
+                width: 20%
+            }
+            #result{
+                color: black;
+                font-family: 'Roboto', sans-serif;
+                font-size: 30px;
+            }
+            .loader {
+                position: relative;
+                border: 16px solid #f3f3f3; /* Light grey */
+                border-top: 16px solid #3498db; /* Blue */
+                border-radius: 50%;
+                width: 120px;
+                height: 120px;
+                animation: spin 2s linear infinite;
+
+                z-index: 99 !important;      
+                position: fixed;
+                top: 45%;
+                left: 47%;
+                /* bring your own prefixes */
+                transform: translate(-50%, -50%);    
+            }
+
+            @keyframes spin {
+                0% { transform: rotate(0deg); }
+                100% { transform: rotate(360deg); }
+            }
+
+            #border{
+                padding-top: 10px;
+                margin-top: 20px;
+                border-right: 1px solid black;
+                height: 150%;
+                border-collapse:collapse;
+                padding-bottom:0 100px;
+            }
+            #par{
+                padding-top: 50px;
+                padding-right: 30px;
+                padding-left: 30px;
+            }
+            .imp{
+                color: orange;
+                font-family: 'Roboto', sans-serif;
+                font-weight: bold;
+            }
+            .b{
+                margin-bottom: 50px;
+            }
+            .navbb{
+                background-color: #F0F0F0;
+            }    
+        </style>  
+    </head>
+
+    <body>
+        <div>
+            <nav class="navbar navbar-expand-sm navbb">
+                <a href="{{url_for('account')}}"> <img alt="Account" class="profile" src="../static/resources/user.svg"> </a>
+                <ul class="navbar-nav ml-auto">
+                    <a class="nav-item nav-link black" href="{{url_for('home')}}">Home</a>
+                    {% if current_user.is_authenticated %}
+                        <a class="nav-item nav-link imp" href="{{url_for('grouper')}}">Group Generator</a>
+                        <a class="nav-item nav-link black" href="{{url_for('logout')}}">Logout</a>
+                    {% else %}
+                        <a class="nav-item nav-link black" href="{{url_for('login')}}">Log in</a>
+                        <a class="nav-item nav-link black" href="{{url_for('register')}}">Register</a>
+                    {% endif %}
+                </ul>
+            </nav>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="alert alert-{{category}}"> <!-- e.g. alert-success class -->
+                            {{message}}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+
+            <div class="ls">
+                {% block content %}{% endblock %}
+            </div>           
+                 <!-- content is an arbitrary name. Sub-templates will override content -->
+        </div>
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
+        {% block javascript %} {% endblock %}
+    </body>
+</html>

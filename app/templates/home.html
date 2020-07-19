@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="bg">
+    <div id="title">Grouper</div>
+
+    <div id="subTitle" class="tbpadding">
+      <p>An advanced group generator that innovates online learning.</p>       
+    </div>
+  </div>
+{% endblock content %}
+
+{% block javascript %}
+  <script src="{{url_for('static', filename='homejs.js')}}"></script>
+{% endblock javascript%}

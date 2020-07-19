@@ -1,0 +1,138 @@
+body, html {
+  height: 100%;
+}
+
+.black{
+  color: black;
+  font-family: 'Roboto', sans-serif;
+}
+.none{
+  bottom: 0%;
+}
+.ls{
+  width: 100%;
+  position: fixed;
+  right: 0;
+  height: 100%;
+
+}
+.tbpadding{
+  padding-top: 10px;
+  padding-left: 50px;
+  padding-right: 50px;
+  
+}
+.lengthincrease{
+  width: 160px;
+}
+.bt{
+  font-size: 27px;
+  color: black;
+  font-family: 'Roboto', sans-serif;
+}
+.profile{
+  width: 50px;
+  height: 50px;
+}
+
+.black{
+  color: black;
+  font-family: 'Roboto', sans-serif;
+}
+#decorate{
+  width: 10%;
+}
+
+
+.block{
+  height: 100%;
+  position: fixed;
+  overflow-x: hidden;
+  bottom: 0;
+
+}
+
+
+#full {
+  width: 100%;
+  z-index: 1;
+  bottom: 0;
+}
+
+
+/* Control the left side */
+.left {
+  left: 0;
+  background-color: white;
+  
+}
+
+/* Control the right side */
+.right {
+  right: 0;
+}
+
+/* If you want the content centered horizontally and vertically */
+.centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.bg {
+  /* The image used */
+  background-image: url("../static/resources/joanna-kosinska-1_CMoFsPfso-unsplash.jpg");
+
+  /* Full height */
+  height: 100%;
+
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-top: 23%;
+  bottom: 0;
+  }
+
+
+#title{
+  text-align: center;
+  color: aliceblue;
+  font-weight: bold;
+  font-size: 100px;
+  font-family: 'Roboto', sans-serif;
+  margin-right: 420px;
+
+}
+#subTitle{
+  margin-left: 130px;
+  text-align: center;
+  color: aliceblue;
+  font-size: 40px;
+  font-family: 'Roboto', sans-serif;
+}
+
+#button {
+  position: fixed;
+  top: 48%;
+  left: 73%;
+  color: aliceblue;
+  font-size: 40px;
+  border-bottom: 4px solid aliceblue;
+  border-bottom-right-radius: 10px;
+  font-family: 'Roboto', sans-serif;
+  height: 70px;
+  width: 250px;
+  font-style: italic;
+}
+button:hover{
+  -webkit-transform: scale(1.05);
+  -ms-transform: scale(1.05);
+  transform: scale(1.05);
+  background-image: none;
+  background-color: none;
+  color: aliceblue;
+  
+}
