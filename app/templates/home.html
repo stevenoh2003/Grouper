@@ -1,13 +1,292 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <div class="bg">
-    <div id="title">Grouper</div>
 
-    <div id="subTitle" class="tbpadding">
-      <p>An advanced group generator that innovates online learning.</p>       
+
+<style>
+.homepage-background-1{
+  background-color: #329998;  
+  height: 60vh; 
+}
+
+.homepage-background-2{
+  background-color: white; 
+  height: 50vh; 
+}
+
+.center-text{
+  /* margin: 0;
+  padding:0; */
+  text-align: center;
+  vertical-align: middle;
+  /* position: absolute;
+  top: 50%;
+  left:50%;
+  transform: translateX(-50%) translateY(-50%); */
+}
+
+.homepage-title{
+  color: white;
+  padding-top: 25vh
+}
+.homepage-subtitle{
+  color: white;
+  font-size: 20px;
+  line-height: 30px;
+  margin: 20px;
+}
+
+
+.instruction-body{
+  line-height: 30px;
+}
+.inline {
+   display:inline-block;
+   margin-right:5px;
+}
+
+.homepage-button{
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
+    font-size: 20px;
+    color: white;
+    
+}
+.homepage-button:hover{
+  font-weight: bolder;
+
+}
+.homepage-link{
+  color: white;
+}
+.homepage-link:hover{
+  text-decoration: none;
+  color: white;
+}
+
+.homepage-instruction-title{
+  padding-bottom: 10px;
+}
+</style>
+
+<section class="homepage-background-1">
+  <div class="center-text">
+      <h1 class="homepage-title">Grouper</h1>
+      <p class="homepage-subtitle">A group generator that makes your classroom more inclusive.</p>
+      <div style="text-align: center">
+        <input type="button" class="btn btn-light" style="border-radius: 0; margin: 20px; height: 50px;" value="Get Started"></input>
+        <button type="button" class="btn btn-link homepage-link">Watch a tutorial<span style="font-weight: 200; padding-left: 10px;">></span></button>
+      </div>
+  </div>
+<!-- 
+  {% if current_user.is_authenticated %}
+  {% else %}
+  
+  {% endif %} -->
+</section>
+<br>
+<section class="homepage-background-2" style="padding: 0 100px 100px 100px;">
+
+  <div class="row" style="padding: 50px;">
+    <div class="col-xl-4" style="text-align:left;  display:flex;">
+      <div class="instruction-home">
+        <h2 class="">
+          Java
+        </h2>
+        <p class="instruction-body">
+          React components implement a render() method that takes input data and returns what to display. This example uses an XML-like syntax called JSX. Input data that is passed into the component can be accessed by render() via this.props. JSX is optional and not required to use React. Try the Babel REPL to see the raw JavaScript code produced by the JSX compilation step.
+        </p>
+      </div>
+    </div>
+    <div class="col-xl-8" style="text-align:center;">
+      <pre style="height: 40vh; width: 100%; "><code class="language-java" style="text-align: center; border-radius: 0;">
+public class GroupMix {
+  private int groupNum;
+  final static String filePath = "src/sample/classrooms/students.csv";
+
+  public List<List<Student>> sort(String type) {
+      ReadFile p = new ReadFile();
+      List<Student> people = new ArrayList<>();
+
+      for (int i = 1; i < new ReadFile().readLine(filePath); i ++) {
+          people.add(
+
+                  new Student(
+                          p.read(filePath, i, 0),
+                          p.read(filePath, i, 1),
+                          p.read(filePath, i, 2),
+                          p.read(filePath, i, 3),
+                          p.read(filePath, i, 4)
+                  )
+                  //(name, gender, nationality, homeroom, email)
+          );
+
+      }
+
+      Collections.shuffle(people);//randomize the list of people
+
+      Function<Student, String> discriminator = null;
+
+      if(type == "homeroom"){
+          discriminator = Student::getHomeRoom;
+      }else if(type == "gender"){
+          discriminator = Student::getGender;
+      }else if(type == "nationality"){
+          discriminator = Student::getNationality;
+      }//check the type of sorting the user wants
+
+      AtomicInteger index = new AtomicInteger();
+      List<List<Student>> groups = new ArrayList<>(people.stream()
+              .sorted(Comparator.comparing(discriminator))
+              .collect(Collectors.groupingBy(e -> index.getAndIncrement() % groupNum))
+              .values());
+
+//        groups.forEach(System.out::println); //printing each group
+      return groups;//returns List<List<Student>>
+  }
+
+  /**
+    *
+    * @param type      String : "gender", "nationality", "homeroom",
+    * @param groupNum  int
+    * @return          2D Array of groups and emails
+    */
+  public String[][] toEmail(String type, int groupNum){
+      this.groupNum = groupNum;
+
+      List<List<Student>> group = sort(type);//localize the output from read()
+      
+      String[][] emailList = new String[groupNum][4]; //initialise 2D array of emails
+      //TODO: replace with 2D arraylist
+
+      for(int j = 0; j < group.size(); j++) { //for each group in groups
+          System.out.printf("Group %s", (j+1)); //print the group number e.g. "Group 1"
+          System.out.println(); //new line, since printf doesn't print new line by default
+
+          for (int i = 0; i < group.get(j).size(); i++) { //for each student email in group
+
+              emailList[j][i] = group.get(j).get(i).getEmail(); //adding emails to 2d array
+              System.out.println("\t" + group.get(j).get(i).getEmail());
+          }
+      }
+      return emailList;
+  }
+}
+      </code></pre>
+        </div>
+</section>
+
+<section class="homepage-background-2" style="padding: 0 100px 100px 100px;">
+  <div class="row" style="padding: 50px;">
+    <div class="col-xl-4" style="text-align:left;  display:flex;">
+      <div class="instruction-home">
+        <h2 class="">
+          Python
+        </h2>
+        <p class="instruction-body">
+          React components implement a render() method that takes input data and returns what to display. This example uses an XML-like syntax called JSX. Input data that is passed into the component can be accessed by render() via this.props. JSX is optional and not required to use React. Try the Babel REPL to see the raw JavaScript code produced by the JSX compilation step.
+        </p>
+      </div>
+    </div>
+    <div class="col-xl-8" style="text-align:center;">
+      <pre style="height: 40vh; width: 100%; "><code class="language-python" style="text-align: center; border-radius: 0;">
+def group_function(differentiator, num_groups, student_file):
+	groups = [[] for _ in range(num_groups)]
+	students = []
+
+	with open(student_file, "r") as data_file:
+	    csv_reader = csv.DictReader(data_file)
+	    for line in csv_reader:
+	        students.append(line)
+
+	random.shuffle(students) #shuffle students
+
+	if differentiator == "Random":
+		students_iter = iter(students)
+
+		#first, distribute all students evenly e.g. 4 4 4 for 14 students with 3 groups
+		for group in groups:
+			for _ in range(len(students)//num_groups):
+				group.append(next(students_iter)["Name"])
+
+		#distribute the remaining students e.g. 5 5 4 for 14 students with 3 groups
+		for i in range(len(students)%num_groups):
+			groups[i].append(next(students_iter)["Name"])
+
+		return groups
+
+	categories = {student[differentiator] for student in students} #e.g. {Male, Female} {American, Brazilian, Spanish} {10G, 10W, 9W}
+
+	indices = cycle(''.join(str(x) for x in range(num_groups))) #cycles through the groups e.g. 0 1 2 0 1 2 0 1 2 (if num_groups = 3)
+
+	for category in categories:
+		students_with_category = [student for student in students if student[differentiator]==category]
+		for student in students_with_category:
+			groups[int(next(indices))].append(student["Name"])
+	return groups
+      </code></pre>
+    </div>
+</section>
+<hr style="border-width: 3px;">
+<section class="homepage-background-2" style="padding: 0 100px 100px 100px;">
+  <div class="row" style="padding: 50px;">
+    <div class="col-xl-4" style="text-align:left;  display:flex;">
+      <div class="instruction-home">
+        <h2 class="homepage-instruction-title">
+          Create a Google Form
+        </h2>
+        <p class="instruction-body">
+          React components implement a render() method that takes input data and returns what to display. This example uses an XML-like syntax called JSX. Input data that is passed into the component can be accessed by render() via this.props. JSX is optional and not required to use React. Try the Babel REPL to see the raw JavaScript code produced by the JSX compilation step.
+        </p>
+      </div>
+    </div>
+    <div class="col-xl-8" style="text-align:center;">
+      <iframe style="width: 80%; text-align: center; height: 45vh; margin: 10px; padding: 10px 0 10px; border-top: 1px solid black; border-bottom: 1px solid black;" src="https://docs.google.com/forms/d/e/1FAIpQLSdVx4FsYFBOaWxcKqTaiBLIcgH4wQH66oFqDsgtLd128Dbbug/viewform?embedded=true" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>    </div>
+  </div>
+</section>
+<br>
+
+<section class="homepage-background-2" style="padding: 50px 100px 50px 100px;">
+  <div class="row" style="padding: 50px;">
+    <div class="col-xl-4" style="text-align:left;  display:flex;">
+      <div class="instruction-home">
+        <h2 class="homepage-instruction-title">
+          Obtain the results
+        </h2>
+        <p class="instruction-body">
+          React components implement a render() method that takes input data and returns what to display. This example uses an XML-like syntax called JSX. Input data that is passed into the component can be accessed by render() via this.props. JSX is optional and not required to use React. Try the Babel REPL to see the raw JavaScript code produced by the JSX compilation step.
+        </p>
+      </div>
+    </div>
+    <div class="col-xl-8" style="text-align:center;">
+      <img style="width: auto; text-align: center; height: 40vh" src="https://jhack-hackathon.s3.ap-northeast-1.amazonaws.com/static/assets/images/jjj.png">
     </div>
   </div>
+</section>
+<br>
+
+<section class="homepage-background-2" style="padding:50px 100px 50px 100px;">
+  <div class="row" style="padding: 50px;">
+    <div class="col-xl-4" style="text-align:left;  display:flex;">
+      <div class="instruction-home">
+        <h2 class="homepage-instruction-title">
+          Export as CSV
+        </h2>
+        <p class="instruction-body">
+          React components implement a render() method that takes input data and returns what to display. This example uses an XML-like syntax called JSX. Input data that is passed into the component can be accessed by render() via this.props. JSX is optional and not required to use React. Try the Babel REPL to see the raw JavaScript code produced by the JSX compilation step.
+        </p>
+      </div>
+    </div>
+    <div class="col-xl-8" style="text-align:center;">
+      <img style="width: auto; text-align: center; height: 45vh; " src="https://jhack-hackathon.s3.ap-northeast-1.amazonaws.com/static/assets/images/Screen+Shot+2021-06-22+at+13.24.53.png">
+    </div>
+  </div>
+</section>
+  
 {% endblock content %}
 
 {% block javascript %}
