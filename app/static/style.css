@@ -2,6 +2,9 @@ body, html {
   height: 100%;
 }
 
+.text-center {
+  
+}
 .black{
   color: black;
   font-family: 'Roboto', sans-serif;
@@ -80,21 +83,6 @@ body, html {
   transform: translate(-50%, -50%);
   text-align: center;
 }
-
-.bg {
-  /* The image used */
-  background-image: url("../static/resources/joanna-kosinska-1_CMoFsPfso-unsplash.jpg");
-
-  /* Full height */
-  height: 100%;
-
-  /* Center and scale the image nicely */
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-  padding-top: 23%;
-  bottom: 0;
-  }
 
 
 #title{
