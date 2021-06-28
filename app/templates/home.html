@@ -91,8 +91,26 @@
   {% endif %} -->
 </section>
 <br>
-<section class="homepage-background-2" style="padding: 0 100px 100px 100px;">
 
+<section class="homepage-background-2" style="padding: 50px 100px 100px 100px;">
+  <div class="row" style="padding: 50px;">
+    <div class="col-xl-12" style="display:flex;">
+      <div class="instruction-home">
+        <h2 class="homepage-instruction-title">
+          What is Grouper?
+        </h2>
+        <p class="instruction-body">
+          The post-pandemic world needs more inclusive learning environments. Grouper is an advanced grouping algorithm that enhances classroom diversity. Teachers usually utilize random group generators to put students into groups for class activities and projects. However, we felt that this method is ineffective. The Grouper software works by taking in a list of students' names, genders, nationalities, specific academic interests and evenly distributes these students into groups based on specific parameters such as "mixed gender" and "mixed nationalities" to create a diverse learning environment. Additionally, with the onset of the coronavirus, teachers had to manually create video conference links for each group. Grouper takes group generating to another level by automatically generating Google Meet or Zoom links and emailing them to the relevant participants.
+        </p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+
+<section class="homepage-background-2" style="padding: 0 100px 100px 100px;">
   <div class="row" style="padding: 50px;">
     <div class="col-xl-12" style="text-align:left;  display:flex;">
       <h2 class="">
@@ -105,9 +123,9 @@ public class GroupMix {
   private int groupNum;
   final static String filePath = "src/sample/classrooms/students.csv";
 
-  public List<List<Student>> sort(String type) {
+  public List&lt;List&lt;Student&gt;&gt; sort(String type) {
       ReadFile p = new ReadFile();
-      List<Student> people = new ArrayList<>();
+      List&lt;Student&gt; people = new ArrayList<>();
 
       for (int i = 1; i < new ReadFile().readLine(filePath); i ++) {
           people.add(
@@ -126,7 +144,7 @@ public class GroupMix {
 
       Collections.shuffle(people);//randomize the list of people
 
-      Function<Student, String> discriminator = null;
+      Function&lt;Student, String&gt; discriminator = null;
 
       if(type == "homeroom"){
           discriminator = Student::getHomeRoom;
@@ -137,13 +155,13 @@ public class GroupMix {
       }//check the type of sorting the user wants
 
       AtomicInteger index = new AtomicInteger();
-      List<List<Student>> groups = new ArrayList<>(people.stream()
+      List&lt;List&lt;Student&gt;&gt; groups = new ArrayList<>(people.stream()
               .sorted(Comparator.comparing(discriminator))
               .collect(Collectors.groupingBy(e -> index.getAndIncrement() % groupNum))
               .values());
 
 //        groups.forEach(System.out::println); //printing each group
-      return groups;//returns List<List<Student>>
+      return groups;//returns List&lt;List&lt;Student&gt;&gt;
   }
 
   /**
@@ -155,7 +173,7 @@ public class GroupMix {
   public String[][] toEmail(String type, int groupNum){
       this.groupNum = groupNum;
 
-      List<List<Student>> group = sort(type);//localize the output from read()
+      List&lt;List&lt;Student&gt;&gt; group = sort(type);//localize the output from read()
       
       String[][] emailList = new String[groupNum][4]; //initialise 2D array of emails
       //TODO: replace with 2D arraylist
@@ -235,7 +253,7 @@ def group_function(differentiator, num_groups, student_file):
         <p class="instruction-body">
           React components implement a render() method that takes input data and returns what to display. This example uses an XML-like syntax called JSX. Input data that is passed into the component can be accessed by render() via this.props. JSX is optional and not required to use React. Try the Babel REPL to see the raw JavaScript code produced by the JSX compilation step.
         </p>
-        <a href="https://docs.google.com/forms/d/1gxsqvNYpYrSMO7EeQXMF9Bp5R40YoJ1Vn-EalggOkPw/edit"><button class="btn btn-info">Make a Copy</button></a>
+        <a href="https://docs.google.com/forms/d/1gxsqvNYpYrSMO7EeQXMF9Bp5R40YoJ1Vn-EalggOkPw/copy"><button class="btn btn-info">Make a Copy</button></a>
       </div>
     </div>
     <div class="col-xl-8" style="text-align:center;">
