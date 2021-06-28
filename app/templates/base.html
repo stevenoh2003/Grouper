@@ -4,7 +4,6 @@
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}">
@@ -139,7 +138,6 @@
         }
 
         </style>
-        <div>  
             <!-- <nav class="navbar navbar-expand-sm navbb">
                 <a href="{{url_for('account')}}"> <img alt="Account" class="profile" src="../static/resources/user.svg"> </a>
                 <ul class="navbar-nav ml-auto">
@@ -155,21 +153,28 @@
             </nav> -->
 
 
-            {% with messages = get_flashed_messages(with_categories=true) %}
-                {% if messages %}
-                    {% for category, message in messages %}
-                        <div class="alert alert-{{category}}"> <!-- e.g. alert-success class -->
-                            {{message}}
-                        </div>
-                    {% endfor %}
-                {% endif %}
-            {% endwith %}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{category}}"> <!-- e.g. alert-success class -->
+                        {{message}}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
 
 
-            {% block content %}{% endblock %}
-          
-                 <!-- content is an arbitrary name. Sub-templates will override content -->
+        {% block content %}{% endblock %}
+
+
+        <div class="footer-copyright text-center py-3">© 2020 Copyright:
+            <a href="https://techona.org/">Techona.org</a>
         </div>
+        <!-- Copyright -->
+
+
+          
+        
 
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->

@@ -15,14 +15,15 @@
 }
 
 .center-text{
-  /* margin: 0;
-  padding:0; */
+  margin: 0;
+  padding:0;
   text-align: center;
   vertical-align: middle;
   /* position: absolute;
   top: 50%;
   left:50%;
-  transform: translateX(-50%) translateY(-50%); */
+  transform: translateX(-50%) translateY(-50%);
+ */
 }
 
 .homepage-title{
@@ -75,6 +76,7 @@
 
 <section class="homepage-background-1">
   <div class="center-text">
+      <!-- <img style="height:100px;display:block; margin:auto;" src="https://jhack-hackathon.s3.ap-northeast-1.amazonaws.com/static/assets/images/image0-2.png"> -->
       <h1 class="homepage-title">Grouper</h1>
       <p class="homepage-subtitle">A group generator that makes your classroom more inclusive.</p>
       <div style="text-align: center">
@@ -89,28 +91,41 @@
   {% endif %} -->
 </section>
 <br>
-<section class="homepage-background-2" style="padding: 0 100px 100px 100px;">
 
+<section class="homepage-background-2" style="padding: 50px 100px 100px 100px;">
   <div class="row" style="padding: 50px;">
-    <div class="col-xl-4" style="text-align:left;  display:flex;">
+    <div class="col-xl-12" style="display:flex;">
       <div class="instruction-home">
-        <h2 class="">
-          Java
+        <h2 class="homepage-instruction-title">
+          What is Grouper?
         </h2>
         <p class="instruction-body">
-          React components implement a render() method that takes input data and returns what to display. This example uses an XML-like syntax called JSX. Input data that is passed into the component can be accessed by render() via this.props. JSX is optional and not required to use React. Try the Babel REPL to see the raw JavaScript code produced by the JSX compilation step.
+          The post-pandemic world needs more inclusive learning environments. Grouper is an advanced grouping algorithm that enhances classroom diversity. Teachers usually utilize random group generators to put students into groups for class activities and projects. However, we felt that this method is ineffective. The Grouper software works by taking in a list of students' names, genders, nationalities, specific academic interests and evenly distributes these students into groups based on specific parameters such as "mixed gender" and "mixed nationalities" to create a diverse learning environment. Additionally, with the onset of the coronavirus, teachers had to manually create video conference links for each group. Grouper takes group generating to another level by automatically generating Google Meet or Zoom links and emailing them to the relevant participants.
         </p>
       </div>
     </div>
-    <div class="col-xl-8" style="text-align:center;">
+
+  </div>
+</section>
+
+
+
+<section class="homepage-background-2" style="padding: 0 100px 100px 100px;">
+  <div class="row" style="padding: 50px;">
+    <div class="col-xl-12" style="text-align:left;  display:flex;">
+      <h2 class="">
+        Java
+      </h2>
+    </div>
+    <div class="col-xl-12" style="text-align:center;">
       <pre style="height: 40vh; width: 100%; "><code class="language-java" style="text-align: center; border-radius: 0;">
 public class GroupMix {
   private int groupNum;
   final static String filePath = "src/sample/classrooms/students.csv";
 
-  public List<List<Student>> sort(String type) {
+  public List&lt;List&lt;Student&gt;&gt; sort(String type) {
       ReadFile p = new ReadFile();
-      List<Student> people = new ArrayList<>();
+      List&lt;Student&gt; people = new ArrayList<>();
 
       for (int i = 1; i < new ReadFile().readLine(filePath); i ++) {
           people.add(
@@ -129,7 +144,7 @@ public class GroupMix {
 
       Collections.shuffle(people);//randomize the list of people
 
-      Function<Student, String> discriminator = null;
+      Function&lt;Student, String&gt; discriminator = null;
 
       if(type == "homeroom"){
           discriminator = Student::getHomeRoom;
@@ -140,13 +155,13 @@ public class GroupMix {
       }//check the type of sorting the user wants
 
       AtomicInteger index = new AtomicInteger();
-      List<List<Student>> groups = new ArrayList<>(people.stream()
+      List&lt;List&lt;Student&gt;&gt; groups = new ArrayList<>(people.stream()
               .sorted(Comparator.comparing(discriminator))
               .collect(Collectors.groupingBy(e -> index.getAndIncrement() % groupNum))
               .values());
 
 //        groups.forEach(System.out::println); //printing each group
-      return groups;//returns List<List<Student>>
+      return groups;//returns List&lt;List&lt;Student&gt;&gt;
   }
 
   /**
@@ -158,7 +173,7 @@ public class GroupMix {
   public String[][] toEmail(String type, int groupNum){
       this.groupNum = groupNum;
 
-      List<List<Student>> group = sort(type);//localize the output from read()
+      List&lt;List&lt;Student&gt;&gt; group = sort(type);//localize the output from read()
       
       String[][] emailList = new String[groupNum][4]; //initialise 2D array of emails
       //TODO: replace with 2D arraylist
@@ -182,17 +197,12 @@ public class GroupMix {
 
 <section class="homepage-background-2" style="padding: 0 100px 100px 100px;">
   <div class="row" style="padding: 50px;">
-    <div class="col-xl-4" style="text-align:left;  display:flex;">
-      <div class="instruction-home">
-        <h2 class="">
-          Python
-        </h2>
-        <p class="instruction-body">
-          React components implement a render() method that takes input data and returns what to display. This example uses an XML-like syntax called JSX. Input data that is passed into the component can be accessed by render() via this.props. JSX is optional and not required to use React. Try the Babel REPL to see the raw JavaScript code produced by the JSX compilation step.
-        </p>
-      </div>
+       <div class="col-xl-12" style="text-align:left;  display:flex;">
+      <h2 class="">
+        Python
+      </h2>
     </div>
-    <div class="col-xl-8" style="text-align:center;">
+    <div class="col-xl-12" style="text-align:center;">
       <pre style="height: 40vh; width: 100%; "><code class="language-python" style="text-align: center; border-radius: 0;">
 def group_function(differentiator, num_groups, student_file):
 	groups = [[] for _ in range(num_groups)]
@@ -231,8 +241,9 @@ def group_function(differentiator, num_groups, student_file):
       </code></pre>
     </div>
 </section>
-<hr style="border-width: 3px;">
-<section class="homepage-background-2" style="padding: 0 100px 100px 100px;">
+
+
+<section class="homepage-background-2" style="padding: 100px;">
   <div class="row" style="padding: 50px;">
     <div class="col-xl-4" style="text-align:left;  display:flex;">
       <div class="instruction-home">
@@ -242,15 +253,16 @@ def group_function(differentiator, num_groups, student_file):
         <p class="instruction-body">
           React components implement a render() method that takes input data and returns what to display. This example uses an XML-like syntax called JSX. Input data that is passed into the component can be accessed by render() via this.props. JSX is optional and not required to use React. Try the Babel REPL to see the raw JavaScript code produced by the JSX compilation step.
         </p>
+        <a href="https://docs.google.com/forms/d/1gxsqvNYpYrSMO7EeQXMF9Bp5R40YoJ1Vn-EalggOkPw/copy"><button class="btn btn-info">Make a Copy</button></a>
       </div>
     </div>
     <div class="col-xl-8" style="text-align:center;">
-      <iframe style="width: 80%; text-align: center; height: 45vh; margin: 10px; padding: 10px 0 10px; border-top: 1px solid black; border-bottom: 1px solid black;" src="https://docs.google.com/forms/d/e/1FAIpQLSdVx4FsYFBOaWxcKqTaiBLIcgH4wQH66oFqDsgtLd128Dbbug/viewform?embedded=true" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>    </div>
+      <iframe style="width: 80%; text-align: center; height: 45vh; margin: 10px; padding: 10px 0 10px; " src="https://docs.google.com/forms/d/e/1FAIpQLSdVx4FsYFBOaWxcKqTaiBLIcgH4wQH66oFqDsgtLd128Dbbug/viewform?embedded=true" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>    </div>
   </div>
 </section>
 <br>
 
-<section class="homepage-background-2" style="padding: 50px 100px 50px 100px;">
+<section class="homepage-background-2" style="padding: 100px;">
   <div class="row" style="padding: 50px;">
     <div class="col-xl-4" style="text-align:left;  display:flex;">
       <div class="instruction-home">
@@ -269,7 +281,7 @@ def group_function(differentiator, num_groups, student_file):
 </section>
 <br>
 
-<section class="homepage-background-2" style="padding:50px 100px 50px 100px;">
+<section class="homepage-background-2" style="padding: 100px;">
   <div class="row" style="padding: 50px;">
     <div class="col-xl-4" style="text-align:left;  display:flex;">
       <div class="instruction-home">
