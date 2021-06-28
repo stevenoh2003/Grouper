@@ -1,5 +1,6 @@
 from itsdangerous import TimedJSONWebSignatureSerializer as Serializer
-from app import db, login_manager, app, admin
+from app import login_manager, admin
+from app.database import db
 from flask_login import UserMixin, current_user
 from flask_admin.contrib.sqla import ModelView
 

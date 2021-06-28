@@ -1,7 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField, RadioField, SelectField, MultipleFileField, IntegerField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, MultipleFileField
 from flask_wtf.file import FileAllowed
-from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError, Optional
+from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from app.models import User
 from flask_login import current_user
 
@@ -26,15 +26,6 @@ class LoginForm(FlaskForm):
 
  	submit = SubmitField("Login")
 
-class GrouperForm(FlaskForm):
-	num_groups = IntegerField("Number of Groups", validators=[Optional()])
-	differentiator = SelectField("Group by", coerce=str) #TODO: Add custom groups
-	students = SelectField("Class", coerce=str)
-	service = RadioField("Service", choices=[("Google Meet", "Google Meet"), ("Zoom", "Zoom"), ("None", "None")], validators=[Optional()], default="None")
-	send_email = BooleanField("Send Email", description="Send an email with the video conference link to each participant")
-	gmail = StringField("Your Gmail")
-	gmail_password = PasswordField("Your Gmail Password")
-	submit = SubmitField("Generate")
 
 class UpdateAccountForm(FlaskForm):
 	email = StringField("Email", validators=[DataRequired(), Email()])
@@ -61,7 +52,3 @@ class ResetPasswordForm(FlaskForm):
 	password = PasswordField("Password", validators=[DataRequired()])
 	confirm_password = PasswordField("Confirm Password", validators=[DataRequired(), EqualTo("password")])
 	submit = SubmitField("Reset Password")
-
-class SaveGroupForm(FlaskForm):
-	filename = StringField("Group name", validators=[DataRequired()])
-	submit = SubmitField("Save group")
