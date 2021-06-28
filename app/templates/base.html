@@ -138,20 +138,6 @@
         }
 
         </style>
-            <!-- <nav class="navbar navbar-expand-sm navbb">
-                <a href="{{url_for('account')}}"> <img alt="Account" class="profile" src="../static/resources/user.svg"> </a>
-                <ul class="navbar-nav ml-auto">
-                    <a class="nav-item nav-link black" href="{{url_for('home')}}">Home</a>
-                    {% if current_user.is_authenticated %}
-                        <a class="nav-item nav-link imp" href="{{url_for('grouper')}}">Group Generator</a>
-                        <a class="nav-item nav-link black" href="{{url_for('logout')}}">Logout</a>
-                    {% else %}
-                        <a class="nav-item nav-link black" href="{{url_for('login')}}">Log in</a>
-                        <a class="nav-item nav-link black" href="{{url_for('register')}}">Register</a>
-                    {% endif %}
-                </ul>
-            </nav> -->
-
 
         {% with messages = get_flashed_messages(with_categories=true) %}
             {% if messages %}

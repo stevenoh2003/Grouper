@@ -80,10 +80,13 @@
       <h1 class="homepage-title">Grouper</h1>
       <p class="homepage-subtitle">A group generator that makes your classroom more inclusive.</p>
       <div style="text-align: center">
-        <input type="button" class="btn btn-light" style="border-radius: 0; margin: 20px; height: 50px;" value="Get Started"></input>
+        <a href="{{url_for('users.register') }}">
+          <input type="button" class="btn btn-light" style="border-radius: 0; margin: 20px; height: 50px;" value="Get Started"></input>
+        </a>
         <button type="button" class="btn btn-link homepage-link">Watch a tutorial<span style="font-weight: 200; padding-left: 10px;">></span></button>
       </div>
   </div>
+  <!-- users.login -->
 <!-- 
   {% if current_user.is_authenticated %}
   {% else %}
