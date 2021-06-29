@@ -36,12 +36,12 @@ class User(db.Model, UserMixin):
 	def __repr__(self):
 		return f"User({self.email}, {self.role})"
 
-
+#https://docs.sqlalchemy.org/en/14/orm/backref.html
 class Classroom(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	name = db.Column(db.String(30), unique=False)
 	teacher_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-	students = db.relationship("Student", secondary="student_classroom", lazy=True) #Student.classes, Classroom.members
+	students = db.relationship("Student", secondary="student_classroom", back_populates="classes", lazy=True) #Student.classes, Classroom.members
 
 	def __repr__(self):
 		return f"Class({self.name} {self.teacher_id})"
@@ -53,7 +53,7 @@ class Student(db.Model):
 	email = db.Column(db.String(120), unique=True)
 	nationality = db.Column(db.String(30), unique=False)
 	birthday = db.Column(db.DateTime, unique=False)
-	classes = db.relationship("Classroom", secondary="student_classroom", lazy=True) #Classroom.students, Student.
+	classes = db.relationship("Classroom", secondary="student_classroom", back_populates="students", lazy=True) #Classroom.students, Student.
 
 	def __repr__(self):
 		return f"Student({self.name}, {self.classes})"
