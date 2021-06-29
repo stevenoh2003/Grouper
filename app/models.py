@@ -3,6 +3,7 @@ from app import login_manager, admin
 from app.database import db
 from flask_login import UserMixin, current_user
 from flask_admin.contrib.sqla import ModelView
+import os
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -16,12 +17,12 @@ class User(db.Model, UserMixin):
 	classrooms = db.relationship('Classroom', backref='teacher', lazy=True) #Classroom.teacher, User.classrooms
 
 	def get_reset_token(self, expires_seconds=1800):
-		serializer_obj = Serializer(app.config["SECRET_KEY"], expires_seconds)
+		serializer_obj = Serializer(os.getenv("SECRET_KEY"), expires_seconds)
 		return serializer_obj.dumps({"user_id": self.id}).decode()
 
 	@staticmethod
 	def verify_reset_token(token):
-		serializer_obj = Serializer(app.config["SECRET_KEY"])
+		serializer_obj = Serializer(os.getenv("SECRET_KEY"))
 		try: 
 			user_id = serializer_obj.loads(token)["user_id"]
 		except: #token expired. itsdangerous.exc.SignatureExpired: Signature expired

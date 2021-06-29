@@ -1,17 +1,18 @@
 import os
+from flask import url_for
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Mail
 
-def send_reset_email(recipient):
+def send_reset_email(user):
 	token = user.get_reset_token()
 	message = Mail(
-		from_email=os.getenv("MAIL_USERNAME"), 
-		to_emails=(recipient),
+		from_email=os.environ.get('MAIL_USERNAME'), 
+		to_emails=(user.email),
 		subject="Password Reset Request",
 		html_content = f"""
 			<p>
 			To reset your password, visit the following link:
-			{url_for("reset_password", token=token, _external=True)}
+			{url_for("users.reset_password", token=token, _external=True)}
 			</p>
 
 			<p>
