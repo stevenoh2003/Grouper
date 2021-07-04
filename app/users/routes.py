@@ -70,16 +70,20 @@ def account():
 				csv_reader = csv.DictReader(io.StringIO(class_file.stream.read().decode("UTF8"), newline=None), delimiter=",")
 				class_name = os.path.splitext(class_file.filename)[0]
 
-				#create a classroom with the filename of the CSV as the name
-				current_user.create_classroom(name=class_name)
-				c = Classroom.query.filter_by(name=class_name).first()
-				db.session.add(c)
-				db.session.commit()
+				#create a classroom with the filename of the CSV as the name if it does not already exist
+				c = Classroom.query.filter_by(name=class_name).first() #check if classroom exists
+				if not c:
+					current_user.create_classroom(name=class_name)
+					c = Classroom.query.filter_by(name=class_name).first()
+					db.session.add(c)
+					db.session.commit()
 
 				#add Students in the file to the newly created classroom
 				for line in csv_reader:
-					s = Student(name=line["Name"], nationality=line["Nationality"], email=line["Email"])
-					c.students.append(s)
+					studentExists = Student.query.filter_by(email=line["Email"]).first()
+					if not studentExists:
+						s = Student(name=line["Name"], nationality=line["Nationality"], email=line["Email"])
+						c.students.append(s)
 				db.session.commit()
 
 		current_user.email = form.email.data
