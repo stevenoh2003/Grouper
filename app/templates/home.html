@@ -4,6 +4,20 @@
 
 
 <style>
+
+@media screen and (min-width:500px) {
+  /* smaller screens */
+  .homepage-background-2{
+    margin: 0 5% 0 5%;
+  }
+}
+
+
+body, html{
+  overflow-x: hidden;
+  overflow-y: scroll;
+  
+}
 .homepage-background-1{
   background-color: #329998;  
   height: 60vh; 
@@ -11,7 +25,6 @@
 
 .homepage-background-2{
   background-color: white; 
-  height: 50vh; 
 }
 
 .center-text{
@@ -25,6 +38,7 @@
   transform: translateX(-50%) translateY(-50%);
  */
 }
+
 
 .homepage-title{
   color: white;
@@ -72,6 +86,29 @@
 .homepage-instruction-title{
   padding-bottom: 10px;
 }
+
+.code-snippet{
+  height: 40vh; 
+  width: 100%; 
+}
+
+.google-form{
+  text-align: center; 
+  width: 100%; 
+  height: 45vh;
+  margin: 10px; 
+  padding: 10px 0 10px;
+}
+
+@media screen and (max-width:500px) {
+  /* smaller screens */
+  .code-snippet{
+    height: 70vh;
+  }
+  .google-form{
+    height: 60vh;
+  }
+}
 </style>
 
 <section class="homepage-background-1">
@@ -95,7 +132,7 @@
 </section>
 <br>
 
-<section class="homepage-background-2" style="padding: 50px 100px 100px 100px;">
+<section class="homepage-background-2">
   <div class="row" style="padding: 50px;">
     <div class="col-xl-12" style="display:flex;">
       <div class="instruction-home">
@@ -103,17 +140,17 @@
           What is Grouper?
         </h2>
         <p class="instruction-body">
-          The post-pandemic world needs more inclusive learning environments. Grouper is an advanced grouping algorithm that enhances classroom diversity. Teachers usually utilize random group generators to put students into groups for class activities and projects. However, we felt that this method is ineffective. The Grouper software works by taking in a list of students' names, genders, nationalities, specific academic interests and evenly distributes these students into groups based on specific parameters such as "mixed gender" and "mixed nationalities" to create a diverse learning environment. Additionally, with the onset of the coronavirus, teachers had to manually create video conference links for each group. Grouper takes group generating to another level by automatically generating Google Meet or Zoom links and emailing them to the relevant participants.
+         Grouper is an advanced grouping algorithm that enhances classroom diversity. Teachers usually utilize random group generators to put students into groups for class activities and projects. However, we felt that this method is ineffective. The Grouper software works by taking in a list of students' names, genders, nationalities, specific academic interests and evenly distributes these students into groups based on specific parameters such as "mixed gender" and "mixed nationalities" to create a diverse learning environment. Additionally, with the onset of the coronavirus, teachers had to manually create video conference links for each group. Grouper takes group generating to another level by automatically generating Google Meet or Zoom links and emailing them to the relevant participants.
         </p>
       </div>
     </div>
 
   </div>
 </section>
+<hr style="margin: 0 20px 0 20px">
 
 
-
-<section class="homepage-background-2" style="padding: 0 100px 100px 100px;">
+<section class="homepage-background-2">
   <div class="row" style="padding: 50px;">
     <div class="col-xl-12" style="text-align:left;  display:flex;">
       <h2 class="">
@@ -121,16 +158,16 @@
       </h2>
     </div>
     <div class="col-xl-12" style="text-align:center;">
-      <pre style="height: 40vh; width: 100%; "><code class="language-java" style="text-align: center; border-radius: 0;">
+      <pre style="" class="code-snippet"><code class="language-java" style="text-align: center; border-radius: 0;">
 public class GroupMix {
   private int groupNum;
   final static String filePath = "src/sample/classrooms/students.csv";
 
   public List&lt;List&lt;Student&gt;&gt; sort(String type) {
       ReadFile p = new ReadFile();
-      List&lt;Student&gt; people = new ArrayList<>();
+      List&lt;Student&gt; people = new ArrayList&lt;&gt;();
 
-      for (int i = 1; i < new ReadFile().readLine(filePath); i ++) {
+      for (int i = 1; i &lt; new ReadFile().readLine(filePath); i ++) {
           people.add(
 
                   new Student(
@@ -158,7 +195,7 @@ public class GroupMix {
       }//check the type of sorting the user wants
 
       AtomicInteger index = new AtomicInteger();
-      List&lt;List&lt;Student&gt;&gt; groups = new ArrayList<>(people.stream()
+      List&lt;List&lt;Student&gt;&gt; groups = new ArrayList&lt;&gt;(people.stream()
               .sorted(Comparator.comparing(discriminator))
               .collect(Collectors.groupingBy(e -> index.getAndIncrement() % groupNum))
               .values());
@@ -181,11 +218,11 @@ public class GroupMix {
       String[][] emailList = new String[groupNum][4]; //initialise 2D array of emails
       //TODO: replace with 2D arraylist
 
-      for(int j = 0; j < group.size(); j++) { //for each group in groups
+      for(int j = 0; j &lt; group.size(); j++) { //for each group in groups
           System.out.printf("Group %s", (j+1)); //print the group number e.g. "Group 1"
           System.out.println(); //new line, since printf doesn't print new line by default
 
-          for (int i = 0; i < group.get(j).size(); i++) { //for each student email in group
+          for (int i = 0; i &lt; group.get(j).size(); i++) { //for each student email in group
 
               emailList[j][i] = group.get(j).get(i).getEmail(); //adding emails to 2d array
               System.out.println("\t" + group.get(j).get(i).getEmail());
@@ -198,7 +235,7 @@ public class GroupMix {
         </div>
 </section>
 
-<section class="homepage-background-2" style="padding: 0 100px 100px 100px;">
+<section class="homepage-background-2">
   <div class="row" style="padding: 50px;">
        <div class="col-xl-12" style="text-align:left;  display:flex;">
       <h2 class="">
@@ -206,7 +243,7 @@ public class GroupMix {
       </h2>
     </div>
     <div class="col-xl-12" style="text-align:center;">
-      <pre style="height: 40vh; width: 100%; "><code class="language-python" style="text-align: center; border-radius: 0;">
+      <pre style="" class="code-snippet"><code class="language-python" style="text-align: center; border-radius: 0;">
 def group_function(differentiator, num_groups, student_file):
 	groups = [[] for _ in range(num_groups)]
 	students = []
@@ -246,7 +283,7 @@ def group_function(differentiator, num_groups, student_file):
 </section>
 
 
-<section class="homepage-background-2" style="padding: 100px;">
+<section class="homepage-background-2" >
   <div class="row" style="padding: 50px;">
     <div class="col-xl-4" style="text-align:left;  display:flex;">
       <div class="instruction-home">
@@ -260,14 +297,14 @@ def group_function(differentiator, num_groups, student_file):
       </div>
     </div>
     <div class="col-xl-8" style="text-align:center;">
-      <iframe style="width: 80%; text-align: center; height: 45vh; margin: 10px; padding: 10px 0 10px; " src="https://docs.google.com/forms/d/e/1FAIpQLSdVx4FsYFBOaWxcKqTaiBLIcgH4wQH66oFqDsgtLd128Dbbug/viewform?embedded=true" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>    </div>
+      <iframe class="google-form" style=" " src="https://docs.google.com/forms/d/e/1FAIpQLSdVx4FsYFBOaWxcKqTaiBLIcgH4wQH66oFqDsgtLd128Dbbug/viewform?embedded=true" frameborder="0" marginheight="0" marginwidth="0">Loading…</iframe>    </div>
   </div>
 </section>
-<br>
+<hr style="margin: 0 20px 0 20px">
 
-<section class="homepage-background-2" style="padding: 100px;">
+<section class="homepage-background-2">
   <div class="row" style="padding: 50px;">
-    <div class="col-xl-4" style="text-align:left;  display:flex;">
+    <div class="col-xl-4" style="text-align:left; display:flex;">
       <div class="instruction-home">
         <h2 class="homepage-instruction-title">
           Obtain the results
@@ -277,14 +314,14 @@ def group_function(differentiator, num_groups, student_file):
         </p>
       </div>
     </div>
-    <div class="col-xl-8" style="text-align:center;">
+    <div class="col-xl-8" style="text-align:center; overflow-x: scroll;">
       <img style="width: auto; text-align: center; height: 40vh" src="https://jhack-hackathon.s3.ap-northeast-1.amazonaws.com/static/assets/images/jjj.png">
     </div>
   </div>
 </section>
-<br>
 
-<section class="homepage-background-2" style="padding: 100px;">
+<hr style="margin: 0 20px 0 20px">
+<section class="homepage-background-2">
   <div class="row" style="padding: 50px;">
     <div class="col-xl-4" style="text-align:left;  display:flex;">
       <div class="instruction-home">
@@ -296,12 +333,11 @@ def group_function(differentiator, num_groups, student_file):
         </p>
       </div>
     </div>
-    <div class="col-xl-8" style="text-align:center;">
+    <div class="col-xl-8" style="text-align:center; overflow-x: scroll;">
       <img style="width: auto; text-align: center; height: 45vh; " src="https://jhack-hackathon.s3.ap-northeast-1.amazonaws.com/static/assets/images/Screen+Shot+2021-06-22+at+13.24.53.png">
     </div>
   </div>
 </section>
-  
 {% endblock content %}
 
 {% block javascript %}

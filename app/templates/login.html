@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-	<div class="content-selection tbpadding">
+	<div class="content-selection tbpadding" style="padding-top: 10%; width: 70%; margin: 0 auto; " >
 		<form method="POST" action=""> <!-- empty action means it will post back to the same route -->
 			{{ form.hidden_tag() }} <!-- Adds a CSRF (Cross Site Request Forgery) token -->
 			<fieldset class="form-group">
@@ -53,7 +53,7 @@
 		</form>
 	</div>
 
-	<div class="border-top pt-3 tbpadding">
+	<div class="border-top pt-3 tbpadding" style="padding-top: 10%; width: 70%; margin: 0 auto; ">
 		<small class="text-muted">
 			Need An Account? <a class="ml-2" href="{{url_for('users.register') }}"> Register today </a> <!-- name of the function not route -->
 		</small>
