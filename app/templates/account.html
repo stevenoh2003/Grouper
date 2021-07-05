@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-	<div class="content-selection tbpadding">
+	<div class="content-selection tbpadding" style="width:70%; margin: 0 auto; padding-top: 10%;">
 		<form method="POST" action="" enctype="multipart/form-data"> <!-- enctype is required for forms with file uploads -->
 			{{ form.hidden_tag() }}
 			{{ form.csrf_token }}

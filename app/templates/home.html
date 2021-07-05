@@ -117,18 +117,24 @@ body, html{
       <h1 class="homepage-title">Grouper</h1>
       <p class="homepage-subtitle">A group generator that makes your classroom more inclusive.</p>
       <div style="text-align: center">
-        <a href="{{url_for('users.register') }}">
+        {% if current_user.is_authenticated %}
+        <a href="{{url_for('main.grouper') }}">
+          <input type="button" class="btn btn-light mx-2" style="border-radius: 0; height: 50px;" value="Generate"></input>
+        </a>
+        <a href="{{url_for('users.account') }}">
+          <input type="button" class="btn btn-light mx-2" style="border-radius: 0; height: 50px;" value="Upload"></input>
+        </a>
+        {% else %}
+        <a href="{{url_for('users.login') }}">
           <input type="button" class="btn btn-light" style="border-radius: 0; margin: 20px; height: 50px;" value="Get Started"></input>
         </a>
+        {% endif %}
         <button type="button" class="btn btn-link homepage-link">Watch a tutorial<span style="font-weight: 200; padding-left: 10px;">></span></button>
       </div>
   </div>
   <!-- users.login -->
-<!-- 
-  {% if current_user.is_authenticated %}
-  {% else %}
-  
-  {% endif %} -->
+
+
 </section>
 <br>
 
@@ -291,7 +297,8 @@ def group_function(differentiator, num_groups, student_file):
           Create a Google Form
         </h2>
         <p class="instruction-body">
-          React components implement a render() method that takes input data and returns what to display. This example uses an XML-like syntax called JSX. Input data that is passed into the component can be accessed by render() via this.props. JSX is optional and not required to use React. Try the Babel REPL to see the raw JavaScript code produced by the JSX compilation step.
+          In order to accquire information about your students, we suggest using a Google Form to survey your students about their names, nationalities, email addresses, and genders. You can click the "Make a copy" button to gain access to our template.
+    
         </p>
         <a href="https://docs.google.com/forms/d/1gxsqvNYpYrSMO7EeQXMF9Bp5R40YoJ1Vn-EalggOkPw/copy"><button class="btn btn-info">Make a Copy</button></a>
       </div>
@@ -310,7 +317,7 @@ def group_function(differentiator, num_groups, student_file):
           Obtain the results
         </h2>
         <p class="instruction-body">
-          React components implement a render() method that takes input data and returns what to display. This example uses an XML-like syntax called JSX. Input data that is passed into the component can be accessed by render() via this.props. JSX is optional and not required to use React. Try the Babel REPL to see the raw JavaScript code produced by the JSX compilation step.
+          After your students have filled out the corresponding information, head to the Google Sheet with all of the information.
         </p>
       </div>
     </div>
@@ -329,8 +336,7 @@ def group_function(differentiator, num_groups, student_file):
           Export as CSV
         </h2>
         <p class="instruction-body">
-          React components implement a render() method that takes input data and returns what to display. This example uses an XML-like syntax called JSX. Input data that is passed into the component can be accessed by render() via this.props. JSX is optional and not required to use React. Try the Babel REPL to see the raw JavaScript code produced by the JSX compilation step.
-        </p>
+          Then, export the Google Sheet as a CSV file as shown in the image and <a href="{{url_for('users.login') }}">get started!</a> After you sign up and log in, the page will redirect you to the homepage. Click on the "Generate" button to proceed.</p>
       </div>
     </div>
     <div class="col-xl-8" style="text-align:center; overflow-x: scroll;">
